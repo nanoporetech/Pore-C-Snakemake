@@ -1,0 +1,38 @@
+# Path to a tsv file with fastq files to be processed
+basecalls: basecalls.tsv
+# The basecalls.tsv should be edited to specify which fastqs
+# you want to process. It has 3 columns:
+# 1. run_id - this is a unique ID for each fastq to be processed. It can only contain characters [a-Z][0-9]
+# 2. enzyme - this must match one of the enzymes listed in BioPythons restriction digest package
+# 3. fastq_path - a path to the fastq file to be processed.
+
+output_dir: "data/"
+
+# Note: pore-C tools copies the reference genome into the working directory If
+# you wish to be consistent with the 4DN project for human analyses then you
+# should use the Encode version of GRCh38
+# https://www.encodeproject.org/files/GRCh38_no_alt_analysis_set_GCA_000001405.15/@@download/GRCh38_no_alt_analysis_set_GCA_000001405.15.fasta.gz
+refgenome:
+  # the refgenome_id is include in any filenames after the mapping stage, if you want to remap 
+  # against a different reference genome (for instance a draft assembly) change both the refgenome_id 
+  # and the refgenome_path
+  refgenome_id: GRCh38
+  # a local path to a reference fasta file (either compressed or otherwise)
+  refgenome_path: resources/GRCh38.fasta.gz
+
+matrix_resolutions:
+  # the lowest resolution contacts will be aggregated at
+  base: 1000
+  # higher resolutions to be included in the multi-res cooler files, must be multiple of 'base'
+  zoomify: [1000, 2000, 5000, 10000, 25000, 50000, 100000, 250000, 500000, 1000000, 2500000, 5000000, 10000000]
+
+software:
+  bwa:
+    threads: 35
+    cli_opts: "bwasw -b 5 -q 2 -r 1 -T 15 -z 10"
+  pore_c:
+    create_alignment_table:
+      threads: 5
+      chunksize: 10000
+    create_pairs_file:
+      threads: 4

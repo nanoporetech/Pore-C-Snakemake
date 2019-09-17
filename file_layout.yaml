@@ -1,0 +1,36 @@
+align_table:
+    alignment: '{enzyme}_{run_id}_{refgenome_id}.at.alignment.parquet'
+    alignment_summary: '{enzyme}_{run_id}_{refgenome_id}.at.alignment_summary.csv'
+    catalog: '{enzyme}_{run_id}_{refgenome_id}.at.catalog.yaml'
+    overlap: '{enzyme}_{run_id}_{refgenome_id}.at.overlap.parquet'
+    read: '{enzyme}_{run_id}_{refgenome_id}.at.read.parquet'
+    read_summary: '{enzyme}_{run_id}_{refgenome_id}.at.read_summary.csv'
+basecall:
+    catalog: '{enzyme}_{run_id}.rd.catalog.yaml'
+    fastq: '{enzyme}_{run_id}.rd.pass.fq.gz'
+    read_metadata: '{enzyme}_{run_id}.rd.read_metadata.parquet'
+    stats: '{enzyme}_{run_id}.rd.stats.tsv'
+    summary: '{enzyme}_{run_id}.rd.summary.csv'
+mapping:
+    read_sorted_bam: '{enzyme}_{run_id}_{refgenome_id}.read_sort.bam'
+matrix:
+    catalog: '{enzyme}_{run_id}_{refgenome_id}.matrix.catalog.yaml'
+    coo: '{enzyme}_{run_id}_{refgenome_id}.matrix.coo.csv.gz'
+    cool: '{enzyme}_{run_id}_{refgenome_id}.matrix.cool'
+    mcool_balanced: '{enzyme}_{run_id}_{refgenome_id}.matrix.balanced.mcool'
+    mcool_counts: '{enzyme}_{run_id}_{refgenome_id}.matrix.counts.mcool'
+pairs:
+    catalog: '{enzyme}_{run_id}_{refgenome_id}.pairs.catalog.yaml'
+    cooler: '{enzyme}_{run_id}_{refgenome_id}.pairs.1k.cooler'
+    pairs: '{enzyme}_{run_id}_{refgenome_id}.pairs.pairs.gz'
+refgenome:
+    catalog: '{refgenome_id}.rg.catalog.yaml'
+    chrom_metadata: '{refgenome_id}.rg.metadata.csv'
+    chromsizes: '{refgenome_id}.rg.chromsizes'
+    fasta: '{refgenome_id}.rg.fa.gz'
+    fai: '{refgenome_id}.rg.fa.gz.fai'
+    bwt: '{refgenome_id}.rg.fa.gz.bwt'
+virtual_digest:
+    catalog: '{enzyme}_{refgenome_id}.vd.catalog.yaml'
+    digest_stats: '{enzyme}_{refgenome_id}.vd.digest_stats.csv'
+    fragments: '{enzyme}_{refgenome_id}.vd.fragments.parquet'
