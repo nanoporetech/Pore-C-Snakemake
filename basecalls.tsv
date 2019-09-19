@@ -1,2 +1,2 @@
 run_id	enzyme	fastq_path
-run01	NlaIII	resources/GM12878_NlaIII_reads.fq.gz
+run01	NlaIII	/home/ubuntu/git/pore-c-snakemake/.test/resources/GM12878_NlaIII_reads.fq.gz

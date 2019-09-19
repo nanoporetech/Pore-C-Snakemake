@@ -1,0 +1,80 @@
+$schema: "http://json-schema.org/draft-06/schema#"
+
+description: snakemake configuration file
+
+type: object
+
+properties:
+  basecalls:
+    type: string
+  output_dir:
+    type: string
+  refgenome:
+    type: object
+    properties:
+      refgenome_id:
+        type: string
+      refgenome_path:
+        type: string
+    required:
+      - refgenome_id
+      - refgenome_path
+  matrix_resolutions:
+    type: object
+    properties:
+      base: 
+        type: integer
+      zoomify: 
+        type: array
+    required:
+      - base
+      - zoomify
+  software:
+    type: object
+    properties:
+      bwa:
+        type: object
+        properties:
+          threads:
+            type: integer
+          cli_opts:
+            type: string
+        required:
+          - threads
+          - cli_opts
+      pore_c:
+        type: object
+        properties:
+          create_alignment_table:
+            type: object
+            properties:
+              threads: 
+                type: integer
+              chunksize:
+                  type: integer
+            required:
+              - threads
+              - chunksize
+          create_pairs_file:
+            type: object
+            properties:
+              threads: 
+                type: integer
+            required:
+              - threads
+        required:
+          - create_alignment_table
+          - create_pairs_file
+    required:
+      - bwa 
+      - pore_c
+
+required:
+  - basecall
+  - output_dir
+  - refgenome
+  - matrix_resolutions
+  - software
+
+
+
