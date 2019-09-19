@@ -1,0 +1,21 @@
+$schema: "http://json-schema.org/draft-06/schema#"
+
+description: an entry for the basecall
+properties:
+    runid:
+        type: string
+        pattern: "[a-zA-Z0-9]*$"
+        description: Run id/run name. No spaces, periods or special characters.
+    enzyme:
+        type: string
+        description: Enzyme name  
+    fastq_path:
+        type: string
+        pattern: ".*[fq|fastq].gz$" 
+        description: Full or relative path to compressed concatinated basecalled FASTQ file
+
+
+required:
+    - runid
+    - enzyme
+    - fastq_path

@@ -3,12 +3,15 @@ import yaml
 from pathlib import Path
 from snakemake.utils import validate, min_version
 ##### set minimum snakemake version #####
-#min_version("5.3.0")
+min_version("5.5.4")
 
-
+### Validation of schemas ###
+#validate('config.yaml', schema="schemas/config.schema.yaml")
 ##### load config and sample sheets ##
-
 configfile: "config.yaml"
+
+
+#validate(config['basecalls'], schema="schemas/basecall.schema.yaml")
 
 basecall_df = (
         pd.read_table(config['basecalls'], comment='#')
