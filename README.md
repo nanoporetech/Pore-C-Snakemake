@@ -1,10 +1,11 @@
-`ADD ONT LOGO`
+![ONT](./Images/ONT_logo.png "Oxford Nanopore Technologies")
+
 **************************
 
 # 1. Introduction 
 
 ### Overview:
-???
+This pipeline manages a pore-c workflow starting with raw sequences, and ending    with various analyses and summary statistics as well as conversion from pore-c data types to commonly used Hi-C dataset contains. The pipeline aligns raw data to a provided reference genome    using a set of pore-c aligner parameters, and filters the resulting alignments for alignment subsets that optimally cover each pore-c sequencing read. These are then compared to an in silico restriction map for the target genome, enabling identification of the restriction fragment identity of each alignment, and this output is stored in the “pairs    file” format used by the 4DN consortium. Additionally, the workflow can generate cooler file outputs that can be used for downstream exploration and applications.
 ### Features:
 ???
 
@@ -19,14 +20,18 @@ This pipleine requires a computer running Linux (Ubuntu 16). >64Gb of memory wou
 
 Most software dependecies are managed using *conda*. To install conda, please install [miniconda3](https://conda.io/miniconda.html) and refer to installation [instructions](https://conda.io/projects/conda/en/latest/user-guide/install/index.html).
 You will need to accept the license agreement during installation and we recommend that you allow the Conda installer to prepend its path to your .bashrc file when asked.
+
 ```
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
 bash Miniconda3-latest-Linux-x86_64.sh
 ```
+
 Check if the conda has successfully installed
+
 ```
 conda -h
 ```
+
 If conda has installed correctly, you should see the follow output.
 If you do not see the below output, you may need to close and reopen your terminal.
 
@@ -49,6 +54,7 @@ positional arguments:
 ..............
 ```
 
+---
 
 #### Installation:
 
@@ -59,14 +65,27 @@ A snakemake pipeline to drive the analysis of pore-C data. This workflow follows
 2. [Clone](https://help.github.com/en/articles/cloning-a-repository) the newly created repository to your local system, into the place where you want to perform the data analysis.
 
 
-```
+`
 git clone https://git.oxfordnanolabs.local/genomic_apps_projects/pore-c-snakemake.git
 cd pore-c-snakemake
 ## Creates environment and the dependencies will install automatically 
 conda env create
 conda activate pore_c_snakemake
-```
+`
+
+--- 
+
+#### Installing Pore-C tools
+
+The Pore-C XXX(link to repo) tools are the tools to used the by **Pore-c-Snakemake** and is required to run the pipeline. 
+
+`git clone XXXX
+cd poreC
+conda env create
+pip install -e .
+`
 ***********
+
 
 # 3. Usage
 
@@ -111,28 +130,28 @@ Test cases are in the subfolder `.test`. They are automtically executed via cont
 Once the pipeline has run successfully you should expect the following files in the output directoy:
 
 *  **`align_table/`:**
-    *  `*.at.alignment.parquet` - records containing all alignment information in parquet format
-    *  `*.at.alignment_summary.csv` - alignment summary table
-    *  `*.at.overlap.parquet` - overlaps...????
-    *  `*.at.read.parquet` - records containing read information such as mean qscore and read length
-    *  `*.at.read_summary.csv` - summary stats of input reads, such as read N50
+    *  `*.at.alignment.parquet` - records containing all alignment information in parquet format.
+    *  `*.at.alignment_summary.csv` - alignment summary table.
+    *  `*.at.overlap.parquet` - table of the overlaps.
+    *  `*.at.read.parquet` - records containing read information such as mean qscore and read length.
+    *  `*.at.read_summary.csv` - summary stats of input reads, such as read N50.
 *   **`basecall/`:** 
-    *   `*.rd.pass.fq.gz` - basecall that have pass filtering
-    *   `*.rd.read_metadata.parquet` ???
+    *   `*.rd.pass.fq.gz` - basecall that have pass filtering.
+    *   `*.rd.read_metadata.parquet` ??
     *   `*.rd.stats.tsv` - ???
     *   `*.rd.summary.csv` - Is this same as read_summary.csv ???
 *   **`mapping/`:**
     *   `*.read_sort.bam` - sorted bam alignment file
 *   **`matrix/`**
     *   `*.matrix.coo.csv.gz` - ???
-    *   `*.matrix.cool` - ???
+    *   `*.matrix.cool` -  efficient storage format for high resolution genomic interaction matrices.
     *   `*.matrix.balanced.mcool` - ???
     *   `*.matrix.counts.mcool` - ???
 *   **`pairs/`:**
-    *   `*.pairs.1k.cooler` - ??
+    *   `*.pairs.1k.cooler` - 2D arrays (matrices) with identical axes in HDF5 at 1k bins size.
     *   `*.pairs.pairs.gz` - contains fragment position and fragment pairs
 *   **`refgenome/`:**
-    *   `*.rg.metadata.csv` ???
+    *   `*.rg.metadata.csv` - chromosome lengths 
     *   `*.rg.chromsizes`- reference genome chromosome lengths
     *   `*.rg.fa.gz` - reference genome compressed with bgzip
     *   `*.rg.fa.gz.fai` - samtools indexed reference genome
