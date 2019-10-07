@@ -1,6 +1,6 @@
 
 basecalls: "basecalls.tsv"
-output_dir: "/data/porec_snakemake_test"
+output_dir: "results"
 refgenome:
   refgenome_id: "GRCh38"
   refgenome_path: ".test/resources/GRCh38.fasta.gz"
