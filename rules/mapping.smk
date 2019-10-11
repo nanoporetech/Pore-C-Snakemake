@@ -29,12 +29,9 @@ rule create_alignment_table:
         paths.align_table.alignment_summary,
         paths.align_table.read_summary
     params:
-        prefix=to_prefix(paths.align_table.catalog),
-        chunksize=config['software']['pore_c']['create_alignment_table']['chunksize']
+        prefix=to_prefix(paths.align_table.catalog)
     log: to_log(paths.align_table.catalog)
     benchmark: to_benchmark(paths.align_table.catalog)
     threads: config['software']['pore_c']['create_alignment_table']['threads']
     shell:
-        "{ACTIVATE_POREC} pore_c alignments parse {input.bam} {input.virtual_digest} {params.prefix} -n {threads} --chunksize {params.chunksize} 2>{log}"
-
-
+        "{ACTIVATE_POREC} pore_c alignments parse {input.bam} {input.virtual_digest} {params.prefix} -n {threads} 2>{log}"

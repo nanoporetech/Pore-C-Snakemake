@@ -1,6 +1,6 @@
 dask-worker-space
 .test/dask-worker-space
 .test/.snakemake
-.test/data/*
+.test/results/*
 .snakemake
-data/*
+results/*

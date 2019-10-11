@@ -9,7 +9,6 @@ basecall:
     catalog: '{enzyme}_{run_id}.rd.catalog.yaml'
     fastq: '{enzyme}_{run_id}.rd.pass.fq.gz'
     read_metadata: '{enzyme}_{run_id}.rd.read_metadata.parquet'
-    stats: '{enzyme}_{run_id}.rd.stats.tsv'
     summary: '{enzyme}_{run_id}.rd.summary.csv'
 mapping:
     read_sorted_bam: '{enzyme}_{run_id}_{refgenome_id}.read_sort.bam'
@@ -17,11 +16,9 @@ matrix:
     catalog: '{enzyme}_{run_id}_{refgenome_id}.matrix.catalog.yaml'
     coo: '{enzyme}_{run_id}_{refgenome_id}.matrix.coo.csv.gz'
     cool: '{enzyme}_{run_id}_{refgenome_id}.matrix.cool'
-    mcool_balanced: '{enzyme}_{run_id}_{refgenome_id}.matrix.balanced.mcool'
     mcool_counts: '{enzyme}_{run_id}_{refgenome_id}.matrix.counts.mcool'
 pairs:
     catalog: '{enzyme}_{run_id}_{refgenome_id}.pairs.catalog.yaml'
-    cooler: '{enzyme}_{run_id}_{refgenome_id}.pairs.1k.cooler'
     pairs: '{enzyme}_{run_id}_{refgenome_id}.pairs.pairs.gz'
 refgenome:
     catalog: '{refgenome_id}.rg.catalog.yaml'
@@ -34,3 +31,8 @@ virtual_digest:
     catalog: '{enzyme}_{refgenome_id}.vd.catalog.yaml'
     digest_stats: '{enzyme}_{refgenome_id}.vd.digest_stats.csv'
     fragments: '{enzyme}_{refgenome_id}.vd.fragments.parquet'
+assembly:
+    salsa_bed: '{enzyme}_{run_id}_{refgenome_id}.salsa2.bed'
+juicebox:
+    hicref: '{enzyme}_{refgenome_id}.hicRef'
+    hic_txt: '{enzyme}_{run_id}_{refgenome_id}.hic.txt'

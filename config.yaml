@@ -3,7 +3,7 @@ basecalls: "basecalls.tsv"
 output_dir: "results"
 refgenome:
   refgenome_id: "GRCh38"
-  refgenome_path: ".test/resources/GRCh38.fasta.gz"
+  refgenome_path: "resources/GRCh38.fasta.gz"
 
 matrix_resolutions:
   base: 1000
@@ -27,7 +27,8 @@ software:
     threads: 35
   pore_c: 
     create_alignment_table: 
-      chunksize: 10000
       threads: 5
     create_pairs_file: 
+      threads: 4
+    to_salsa_bed: 
       threads: 4

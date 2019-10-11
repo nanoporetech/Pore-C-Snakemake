@@ -35,7 +35,9 @@ rule bwa_index_refgenome:
     output:
         paths.refgenome.bwt
     conda: "../envs/bwa.yml"
+    log: to_log(paths.refgenome.bwt)
+    benchmark: to_benchmark(paths.refgenome.bwt)
     shell:
-        "bwa index {input}"
+        "bwa index {input} 2>{log}"
 
 

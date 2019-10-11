@@ -30,6 +30,7 @@ include: "rules/reads.smk"  # import fastqs
 include: "rules/mapping.smk"  # map and process resulting alignments
 include: "rules/pairs.smk"  # convert alignments to pairs files 
 include: "rules/matrices.smk" # convert to .cool and .mcool files
+include: "rules/exports.smk" # export to alternative formats
 
 
 ##### output paths #####
@@ -40,21 +41,10 @@ rule all:
     input: 
         refgenome=paths.refgenome.catalog,
         matrix=expand_rows(paths.matrix.mcool_counts, basecall_df)
-    
-        #reference_fasta=API.refgenome.all('bwt'),
-        #virtual_digest=API.virtual_digest.all('catalog'),
-        #mapping=API.mapping.all("read_sorted_bam", query),
-        #align_table=API.align_table.all("catalog", query),
-        ##pairs=API.pairs.all("catalog", query),
-        ##balanced_matrix=API.matrix.all("mcool_balanced", query),
-        ##correlation=API.refdataset_compare_correlate.all('catalog', query),
-        ##tads = API.tad_results.all('sentinel', query),
-        ##merged_matrix_count = API.rungroup_matrix.all("mcool_counts"),
-        #merged_matrix_balanced = API.rungroup_matrix.all("mcool_balanced"),
-        ##pairs=API.pairs.all("catalog", query),
-        #balanced_matrix=API.matrix.all("mcool_balanced", query),
-        #rungroup_matrix_downsample = API.rungroup_matrix_downsample.all("cool")
 
 
+rule salsa_bed:
+    input: expand_rows(paths.assembly.salsa_bed, basecall_df)
 
-
+rule juicebox:
+    input: expand_rows(paths.juicebox.hic_txt, basecall_df)
