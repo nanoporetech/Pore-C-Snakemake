@@ -69,20 +69,16 @@ positional arguments:
 
 #### Installation:
 
-Clone *Pore-c Snakemake* git repository from https://git.oxfordnanolabs.local/genomic_apps_projects/pore-c-snakemake
-A snakemake pipeline to drive the analysis of pore-C data. This workflow follows the format of those in the [Snakemake-Workflows](https://github.com/snakemake-workflows) project.
+Clone this git repository to the location where you want to run your analysis and create the conda environment that will be used to run the pipeline
 
-1. Create a new github repository using this workflow [as a template](https://help.github.com/en/articles/creating-a-repository-from-a-template).
-2. [Clone](https://help.github.com/en/articles/cloning-a-repository) the newly created repository to your local system, into the place where you want to perform the data analysis.
-
-
-`
+```
 git clone https://github.com/nanoporetech/Pore-C-Snakemake.git
 cd pore-c-snakemake
 ## Creates environment and the dependencies will install automatically 
 conda env create
 conda activate pore_c_snakemake
-`
+```
+**Note** before you run any of the snakemake commands below  you need to make sure that you've run `conda activate pore_c_snakemake`.
 
 --- 
 
@@ -90,11 +86,12 @@ conda activate pore_c_snakemake
 
 The [Pore-C tools](https://github.com/nanoporetech/pore-c) package required to run this pipeline. They are not yet available through conda so we have to create an environment manually.
 
-`git clone https://github.com/nanoporetech/pore-c.git
+```
+git clone https://github.com/nanoporetech/pore-c.git
 cd pore-c
 conda env create
 pip install -e .
-`
+```
 ***********
 
 
@@ -126,12 +123,16 @@ or
 
     snakemake --use-conda --drmaa --jobs 100
 
-If you not only want to fix the software stack but also the underlying OS, use
-
-    snakemake --use-conda --use-singularity
-
 in combination with any of the modes above.
 See the [Snakemake documentation](https://snakemake.readthedocs.io/en/stable/executable.html) for further details.
+
+The snakemake pipeline come with two optional targets: i) `salsa_bed` to create a bed file compatible with salsa2 and ii) `juicebox` which will create files compatible with the juicebox suite of tools. 
+
+
+```
+snakemake --use-conda salsa2_bed
+snakemake --use-conda juicebox
+```
 
 ### Testing:
 
