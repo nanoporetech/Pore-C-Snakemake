@@ -1,4 +1,4 @@
-![ONT](./Images/ONT_logo.png "Oxford Nanopore Technologies")
+![.](./ONT_logo.png "Oxford Nanopore Technologies")
 
 **************************
 
