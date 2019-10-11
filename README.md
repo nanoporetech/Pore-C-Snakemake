@@ -141,7 +141,7 @@ Test cases are in the subfolder `.test`. To run the tests use
     snakemake --use-conda  -d .test all salsa_bed  juicebox
 
 
-They are automtically executed via continuous integration with Travis CI and requires [git lfs](https://github.com/git-lfs/git-lfs/wiki/Installation) to be installed.
+These require [git lfs](https://github.com/git-lfs/git-lfs/wiki/Installation) to be installed.
 
 # 4. Output files
 Once the pipeline has run successfully you should expect the following files in the output directoy:
