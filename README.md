@@ -2,7 +2,7 @@
 
 **************************
 
-# 1. Introduction 
+# 1. Introduction
 
 ### Overview:
 
@@ -16,20 +16,20 @@ them to standard file formats for use by downstream tools. The steps involved ar
 * Processing results to filter spurious alignments, detect ligation junctions and assign fragments. The results are stored in a [parquet](http://parquet.apache.org/) table for downstream processing.
 * Converting the results to the following formats:
   - [pairs format](https://github.com/4dn-dcic/pairix/blob/master/pairs_format_specification.md)
-  - [cooler format](https://mirnylab.github.io/cooler/) 
+  - [cooler format](https://mirnylab.github.io/cooler/)
   - [hic medium format](https://github.com/aidenlab/juicer/wiki/Pre#medium-format-most-common)
   - [salsa2 bed format](https://github.com/marbl/SALSA)
 
 
 # 2. Getting started
 
-In most cases, it is best to pre-install conda before starting. All other dependencies will be installed automatically when running the pipeline for the first time. 
+In most cases, it is best to pre-install conda before starting. All other dependencies will be installed automatically when running the pipeline for the first time.
 
 ### Requirements:
 
-This pipleine requires a computer running Linux (Ubuntu 16). >64Gb of memory would be recommended. The pipeline has been tested on minimal server installs of these operating systems.
+This pipline requires a computer running Linux (Ubuntu 16). >64Gb of memory would be recommended. The pipeline has been tested on minimal server installs of these operating systems.
 
-Most software dependecies are managed using *conda*. To install conda, please install [miniconda3](https://conda.io/miniconda.html) and refer to installation [instructions](https://conda.io/projects/conda/en/latest/user-guide/install/index.html).
+Most software dependencies are managed using *conda*. To install conda, please install [miniconda3](https://conda.io/miniconda.html) and refer to installation [instructions](https://conda.io/projects/conda/en/latest/user-guide/install/index.html).
 You will need to accept the license agreement during installation and we recommend that you allow the Conda installer to prepend its path to your .bashrc file when asked.
 
 ```
@@ -74,13 +74,13 @@ Clone this git repository to the location where you want to run your analysis an
 ```
 git clone https://github.com/nanoporetech/Pore-C-Snakemake.git
 cd pore-c-snakemake
-## Creates environment and the dependencies will install automatically 
+## Creates environment and the dependencies will install automatically
 conda env create
 conda activate pore_c_snakemake
 ```
 **Note** before you run any of the snakemake commands below  you need to make sure that you've run `conda activate pore_c_snakemake`.
 
---- 
+---
 
 #### Installing Pore-C tools
 
@@ -103,7 +103,7 @@ Configure the workflow according to your needs via editing the file `config.yaml
 
 #### Add basecall location:
 
-Add the locations of your fastq files to `basecall.tsv`. The run IDs must *not* contain any spaces or special characters. 
+Add the locations of your fastq files to `basecall.tsv`. The run IDs must *not* contain any spaces or special characters.
 
 #### Execute workflow:
 
@@ -126,7 +126,7 @@ or
 in combination with any of the modes above.
 See the [Snakemake documentation](https://snakemake.readthedocs.io/en/stable/executable.html) for further details.
 
-The snakemake pipeline come with two optional targets: i) `salsa_bed` to create a bed file compatible with salsa2 and ii) `juicebox` which will create files compatible with the juicebox suite of tools. 
+The snakemake pipeline come with two optional targets: i) `salsa_bed` to create a bed file compatible with salsa2 and ii) `juicebox` which will create files compatible with the juicebox suite of tools.
 
 
 ```
@@ -144,7 +144,7 @@ Test cases are in the subfolder `.test`. To run the tests use
 These require [git lfs](https://github.com/git-lfs/git-lfs/wiki/Installation) to be installed.
 
 # 4. Output files
-Once the pipeline has run successfully you should expect the following files in the output directoy:
+Once the pipeline has run successfully you should expect the following files in the output directory:
 
 *  **`align_table/`:**
     *  `*.at.catalog.yaml` - an [intake](https://intake.readthedocs.io/en/latest/) catalog containing metadata about the alignment table.
@@ -153,10 +153,10 @@ Once the pipeline has run successfully you should expect the following files in 
     *  `*.at.overlap.parquet` - table of the overlaps between alignments and fragments.
     *  `*.at.read.parquet` - per-read alignment statistics (contacts per-read etc).
     *  `*.at.read_summary.csv` - summary stats of input reads, such as read N50.
-*   **`basecall/`:** 
+*   **`basecall/`:**
     *   `*.rd.catalog.yaml` - an [intake](https://intake.readthedocs.io/en/latest/) catalog containing read metadata.
     *   `*.rd.pass.fq.gz` - basecalls that have passed filtering.
-    *   `*.rd.read_metadata.parquet` - a table of per-read statistics. 
+    *   `*.rd.read_metadata.parquet` - a table of per-read statistics.
     *   `*.rd.summary.csv` - a table of aggregate statistics for the reads.
 *   **`mapping/`:**
     *   `*.read_sort.bam` - bam alignment file sorted by read name.
@@ -184,9 +184,7 @@ Once the pipeline has run successfully you should expect the following files in 
 
 # 5. Help
 
-#### Licence and Copyright:
+#### License and Copyright:
 © 2019 Oxford Nanopore Technologies Ltd.
 
 Bioinformatics-Tutorials is distributed by Oxford Nanopore Technologies under the terms of the MPL-2.0 license.
-
-

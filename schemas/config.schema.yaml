@@ -19,12 +19,21 @@ properties:
     required:
       - refgenome_id
       - refgenome_path
+  sample:
+    type: object
+    properties:
+      sample_id:
+        type: string
+      phased_vcf_path:
+        type: string
+      confident_bed_path:
+        type: string
   matrix_resolutions:
     type: object
     properties:
-      base: 
+      base:
         type: integer
-      zoomify: 
+      zoomify:
         type: array
     required:
       - base
@@ -48,7 +57,7 @@ properties:
           create_alignment_table:
             type: object
             properties:
-              threads: 
+              threads:
                 type: integer
               chunksize:
                   type: integer
@@ -58,7 +67,7 @@ properties:
           create_pairs_file:
             type: object
             properties:
-              threads: 
+              threads:
                 type: integer
             required:
               - threads
@@ -66,7 +75,7 @@ properties:
           - create_alignment_table
           - create_pairs_file
     required:
-      - bwa 
+      - bwa
       - pore_c
 
 required:
@@ -75,6 +84,3 @@ required:
   - refgenome
   - matrix_resolutions
   - software
-
-
-
