@@ -8,11 +8,11 @@ properties:
         description: Run id/run name. No spaces, periods or special characters.
     enzyme:
         type: string
-        description: Enzyme name  
+        description: Enzyme name
     fastq_path:
         type: string
-        pattern: ".*[fq|fastq].gz$" 
-        description: Full or relative path to compressed concatinated basecalled FASTQ file
+        pattern: ".*[fq|fastq].gz$"
+        description: Full or relative path to compressed concatenated basecalled FASTQ file
 
 
 required:

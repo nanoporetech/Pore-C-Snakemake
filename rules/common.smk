@@ -3,7 +3,7 @@ from box import Box
 ACTIVATE_POREC = "set +u; source ~/miniconda3/etc/profile.d/conda.sh ; conda activate ; conda activate poreC; "
 
 def create_path_accessor(prefix: Path) -> Box:
-    """Create a Box to provide '.' access to heirarchy of paths"""
+    """Create a Box to provide '.' access to hierarchy of paths"""
     data = yaml.load(Path("file_layout.yaml").open(), Loader=yaml.SafeLoader)
     paths = {}
     for directory in data.keys():
@@ -48,5 +48,3 @@ def lookup_value(column, df):
         assert(len(row) == 1)
         return row[column].values[0]
     return _inner
-
-

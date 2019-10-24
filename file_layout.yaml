@@ -12,6 +12,11 @@ basecall:
     summary: '{enzyme}_{run_id}.rd.summary.csv'
 mapping:
     read_sorted_bam: '{enzyme}_{run_id}_{refgenome_id}.read_sort.bam'
+phase:
+    coordinate_sorted_bam: '{enzyme}_{run_id}_{refgenome_id}_{biospecimen}.coord_sort.bam'
+    coordinate_sorted_bai: '{enzyme}_{run_id}_{refgenome_id}_{biospecimen}.coord_sort.bam.bai'
+    haplotagged_bam: '{enzyme}_{run_id}_{refgenome_id}_{biospecimen}.haplotagged_coord_sort.bam'
+    read_sorted_haplotagged_bam: '{enzyme}_{run_id}_{refgenome_id}_{biospecimen}.haplotagged_read_sort.bam'
 matrix:
     catalog: '{enzyme}_{run_id}_{refgenome_id}.matrix.catalog.yaml'
     coo: '{enzyme}_{run_id}_{refgenome_id}.matrix.coo.csv.gz'
@@ -27,6 +32,8 @@ refgenome:
     fasta: '{refgenome_id}.rg.fa.gz'
     fai: '{refgenome_id}.rg.fa.gz.fai'
     bwt: '{refgenome_id}.rg.fa.gz.bwt'
+    fasta_unzipped: '{refgenome_id}.rg.fa'
+    fasta_unzipped_fai: '{refgenome_id}.rg.fa.fai'
 virtual_digest:
     catalog: '{enzyme}_{refgenome_id}.vd.catalog.yaml'
     digest_stats: '{enzyme}_{refgenome_id}.vd.digest_stats.csv'

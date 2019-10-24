@@ -1,2 +1,6 @@
 GM12878_NlaIII_reads.fq.gz filter=lfs diff=lfs merge=lfs -text
 GRCh38.fasta.gz filter=lfs diff=lfs merge=lfs -text
+GM12878.conf.bed filter=lfs diff=lfs merge=lfs -text
+GM12878.vcf.gz filter=lfs diff=lfs merge=lfs -text
+GM12878.vcf.gz.tbi filter=lfs diff=lfs merge=lfs -text
+GRCh38.fasta.gz.fai filter=lfs diff=lfs merge=lfs -text
