@@ -2,6 +2,8 @@ from box import Box
 
 ACTIVATE_POREC = "set +u; source ~/miniconda3/etc/profile.d/conda.sh ; conda activate ; conda activate poreC; "
 
+DASK_SETTINGS = "--dask-scheduler-port 0"
+
 def create_path_accessor(prefix: Path) -> Box:
     """Create a Box to provide '.' access to hierarchy of paths"""
     data = yaml.load(Path("file_layout.yaml").open(), Loader=yaml.SafeLoader)

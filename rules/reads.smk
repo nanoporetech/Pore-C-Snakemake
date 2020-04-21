@@ -9,5 +9,8 @@ rule import_basecalls:
         prefix = to_prefix(paths.basecall.catalog)
     log: to_log(paths.basecall.catalog)
     benchmark: to_benchmark(paths.basecall.catalog)
+    conda: PORE_C_CONDA_FILE
+    threads: 1
     shell:
-        "{ACTIVATE_POREC} pore_c reads catalog  {params.fname} {params.prefix} 2> {log}"
+        "pore_c {DASK_SETTINGS} --dask-num-workers {threads} "
+        "reads prepare {params.fname} {params.prefix} 2> {log}"
