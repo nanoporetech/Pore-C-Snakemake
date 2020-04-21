@@ -9,5 +9,6 @@ rule create_pairs_file:
     benchmark: to_benchmark(paths.pairs.catalog)
     log: to_log(paths.pairs.catalog)
     threads: config['software']['pore_c']['create_pairs_file']['threads']
+    conda: PORE_C_CONDA_FILE
     shell:
-        "{ACTIVATE_POREC} pore_c pairs from-alignment-table {input} {params.prefix} -n {threads} 2>{log}"
+        "pore_c pairs from-alignment-table {input} {params.prefix} -n {threads} 2>{log}"

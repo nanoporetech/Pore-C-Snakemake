@@ -5,6 +5,6 @@ channels:
   - defaults
 dependencies:
   - python == 3.6
-  - snakemake-minimal == 5.5.4
+  - snakemake-minimal >= 5.10
   - pandas == 0.25.1
   - python-box == 3.4.3

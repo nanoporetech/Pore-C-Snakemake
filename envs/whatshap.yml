@@ -1,5 +1,18 @@
 channels:
-    - conda-forge
     - bioconda
+    - conda-forge
+    - defaults
 dependencies:
-    - whatshap==0.18
+    # - whatshap
+    #- python
+    #- pysam >=0.15
+    #- pyvcf
+    #- pyfaidx >=0.5.5.2
+    #- xopen >=0.5.0
+    #- networkx
+    #- biopython >=1.73
+    #- pip
+      #- setuptools
+      #- wheel
+    - pip:
+        - /Users/eharrington/p/public/whatshap

@@ -1,13 +1,8 @@
-
 basecalls: "basecalls.tsv"
 output_dir: "results"
 refgenome:
   refgenome_id: "GRCh38"
   refgenome_path: "resources/GRCh38.fasta.gz"
-sample:
-  sample_id: "GM12878"
-  phased_vcf_path: "resources/GM12878.phased.conf.vcf.gz"
-  confident_bed_path: "resources/GM12878.conf.bed"
 
 matrix_resolutions:
   base: 1000
@@ -26,14 +21,20 @@ matrix_resolutions:
     - 5000000
     - 10000000
 software:
+  juicer:
+    tools_url: "https://s3.amazonaws.com/hicfiles.tc4ga.com/public/juicer/juicer_tools_1.19.02.jar"
   bwa:
     cli_opts: "bwasw -b 5 -q 2 -r 1 -T 15 -z 10"
     threads: 35
   pore_c:
     create_alignment_table:
       threads: 5
-    create_pairs_file:
-      threads: 4
+    to_cooler:
+      threads: 10
+    to_unsorted_pairs:
+      threads: 10
+    sort_pairs_file:
+      threads: 10
     to_salsa_bed:
       threads: 4
   sort:
