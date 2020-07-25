@@ -4,6 +4,8 @@ refgenome:
   refgenome_id: "GRCh38"
   refgenome_path: "resources/GRCh38.fasta.gz"
 
+reads_per_batch: 10000 
+
 matrix_resolutions:
   base: 1000
   zoomify:

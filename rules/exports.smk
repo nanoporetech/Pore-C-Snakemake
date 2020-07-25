@@ -1,7 +1,7 @@
 rule to_cooler:
     output: paths.matrix.cool
     input: 
-        contacts = paths.contacts.contacts,
+        contacts = paths.merged_contacts.contacts,
         chromsizes = paths.refgenome.chromsizes,
         fragments = paths.virtual_digest.fragments
     params:
@@ -17,7 +17,7 @@ rule to_cooler:
 rule to_haplotyped_cooler:
     output: touch(paths.matrix.haplotyped_cools)
     input: 
-        contacts = paths.contacts.contacts,
+        contacts = paths.merged_contacts.contacts,
         chromsizes = paths.refgenome.chromsizes,
         fragments = paths.virtual_digest.fragments
     params:
@@ -48,7 +48,7 @@ rule create_mcool_file:
 rule to_unsorted_pairs:
     output: paths.pairs.unsorted_pairs
     input: 
-        contacts = paths.contacts.contacts,
+        contacts = paths.merged_contacts.contacts,
         chromsizes = paths.refgenome.chromsizes,
     params:
         prefix = to_prefix(paths.pairs.unsorted_pairs, 1)
@@ -83,11 +83,10 @@ rule index_pairs:
         "pairix {input} 2>{log}"
 
 
-
 rule to_salsa_bed:
     output: paths.assembly.salsa_bed
     input: 
-        contacts = paths.contacts.contacts,
+        contacts = paths.merged_contacts.contacts,
     params:
         prefix = to_prefix(paths.assembly.salsa_bed)
     log: to_log(paths.assembly.salsa_bed)

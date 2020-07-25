@@ -1,20 +1,23 @@
 align_table:
-    alignment: '{enzyme}_{run_id}_{refgenome_id}.at.alignment.parquet'
-    pore_c: '{enzyme}_{run_id}_{refgenome_id}.at.pore_c.parquet'
+    alignment: '{enzyme}_{run_id}_{batch_id}_{refgenome_id}.at.alignment.parquet'
+    pore_c: '{enzyme}_{run_id}_{batch_id}_{refgenome_id}.at.pore_c.parquet'
 contacts:
+    contacts: '{enzyme}_{run_id}_{batch_id}_{refgenome_id}.contacts.parquet'
+merged_contacts:
     contacts: '{enzyme}_{run_id}_{refgenome_id}.contacts.parquet'
-    concatemers: '{enzyme}_{run_id}_{refgenome_id}.concetemers.parquet'
+    concatemers: '{enzyme}_{run_id}_{refgenome_id}.concatemers.parquet'
 basecall:
     catalog: '{enzyme}_{run_id}.rd.catalog.yaml'
-    fastq: '{enzyme}_{run_id}.rd.pass.fq.gz'
+    fastq: '{enzyme}_{run_id}.rd.{batch_id}.fq.gz'
     read_metadata: '{enzyme}_{run_id}.rd.read_metadata.parquet'
     summary: '{enzyme}_{run_id}.rd.summary.csv'
 mapping:
-    read_sorted_bam: '{enzyme}_{run_id}_{refgenome_id}.read_sort.bam'
-    coord_sorted_bam: '{enzyme}_{run_id}_{refgenome_id}.coord_sort.bam'
-    coord_sorted_bai: '{enzyme}_{run_id}_{refgenome_id}.coord_sort.bam.bai'
-    haplotagged_bam: '{enzyme}_{run_id}_{refgenome_id}.haplotagged.bam'
-    haplotagged_bai: '{enzyme}_{run_id}_{refgenome_id}.haplotagged.bam.bai'
+    read_sorted_bam: '{enzyme}_{run_id}_{batch_id}_{refgenome_id}.read_sort.bam'
+    coord_sorted_bam: '{enzyme}_{run_id}_{batch_id}_{refgenome_id}.coord_sort.bam'
+    coord_sorted_bai: '{enzyme}_{run_id}_{batch_id}_{refgenome_id}.coord_sort.bam.bai'
+    haplotagged_aligns: '{enzyme}_{run_id}_{batch_id}_{refgenome_id}.haplotagged.txt'
+    #haplotagged_bam: '{enzyme}_{run_id}_{batch_id}_{refgenome_id}.haplotagged.bam'
+    #haplotagged_bai: '{enzyme}_{run_id}_{batch_id}_{refgenome_id}.haplotagged.bam.bai'
 matrix:
     cool: '{enzyme}_{run_id}_{refgenome_id}.matrix.cool'
     haplotyped_cools: '{enzyme}_{run_id}_{refgenome_id}.matrix.haplotyped.cools.done'
@@ -39,6 +42,6 @@ virtual_digest:
 assembly:
     salsa_bed: '{enzyme}_{run_id}_{refgenome_id}.salsa.bed'
 juicebox:
-    tools': 'juicer_tools.jar'
+    tools: 'juicer_tools.jar'
     hicref: '{enzyme}_{refgenome_id}.hicRef'
     hic: '{enzyme}_{run_id}_{refgenome_id}.hic'
