@@ -22,7 +22,7 @@ rule virtual_digest:
         paths.refgenome.fasta
     output:
         paths.virtual_digest.catalog,
-        directory(paths.virtual_digest.fragments),
+        paths.virtual_digest.fragments,
         paths.virtual_digest.digest_stats
     params:
         prefix=to_prefix(paths.virtual_digest.catalog)
