@@ -8,9 +8,11 @@ log = snakemake.log_fmt_shell(stdout=False, stderr=True)
 if snakemake.log:
     sys.stderr = open(snakemake.log[0], "a")
 
+
 def write_empty_results():
     with open(snakemake.output[0], "w") as fh:
         fh.write("#readname\thaplotype\tphaseset\tchromosome\n")
+
 
 # use a parameter to skip phasing if needed (makes snakemake pipeline easier to have empty file)
 if not snakemake.params.is_phased:
@@ -39,4 +41,3 @@ shell(
     " -o /dev/null "
     " {log}"
 )
-

@@ -13,9 +13,10 @@ def reformat_bam(infh, outfh):
         if read_idx is None:
             read_idx = len(read_indices)
             read_indices[read_id] = read_idx
-        #align.set_tag(tag='BX', value=align.query_name, value_type="Z")
+        # align.set_tag(tag='BX', value=align.query_name, value_type="Z")
         align.query_name = f"{read_id}:{read_idx}:{align_idx}"
         outfile.write(align)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     reformat_bam(sys.stdin, sys.stdout)
