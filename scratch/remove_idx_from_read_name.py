@@ -2,9 +2,8 @@ from pathlib import Path
 from pysam import AlignmentFile
 from argparse import ArgumentParser
 
-def remove_idx_from_read_names(
-    input_bam: Path
-):
+
+def remove_idx_from_read_names(input_bam: Path):
     """ Replace READNAME:ALIGN_IDX with just READNAME
 
     Originally created because WhatsHap requires unique read names.
@@ -22,10 +21,10 @@ def remove_idx_from_read_names(
     stdout.close()
     infile.close()
 
+
 parser = ArgumentParser()
 parser.add_argument("-i", "--input-bam", dest="input", help="bam to remove idx from")
 
 args = parser.parse_args()
 
 remove_idx_from_read_names(input_bam=args.input)
-
