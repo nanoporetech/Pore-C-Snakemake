@@ -5,6 +5,7 @@ refgenome:
   refgenome_path: "resources/GRCh38.fasta.gz"
 
 reads_per_batch: 10000 
+max_read_length: 100000
 
 matrix_resolutions:
   base: 1000
