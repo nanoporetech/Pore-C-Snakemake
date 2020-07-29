@@ -113,7 +113,7 @@ def expand_basecall_batches(path):
         _ = checkpoints.import_basecalls.get(**wildcards).output[0]
         glob_path = expand(paths.basecall.fastq, **wildcards, allow_missing=True)
         _ = glob_wildcards(glob_path[0])
-        batch_id = sorted(_.batch_id, key=lambda x: int(x.replace("batch","")))
+        batch_id = sorted([b for b in _.batch_id if b!='fail'], key=lambda x: int(x.replace("batch","")))
         res =  expand(str(path), enzyme=[wildcards.enzyme], run_id=[wildcards.run_id], batch_id=batch_id)
         return res
     return inner
@@ -125,6 +125,7 @@ rule merge_contact_files:
     log: to_log(paths.merged_contacts.contacts)
     benchmark: to_benchmark(paths.merged_contacts.contacts)
     threads: 4
+    conda: PORE_C_CONDA_FILE
     shell:
         "pore_c {DASK_SETTINGS} --dask-num-workers {threads} "
         "contacts merge {input} {output}"
@@ -136,6 +137,7 @@ rule summarise_contacts:
     log: to_log(paths.merged_contacts.concatemers)
     benchmark: to_benchmark(paths.merged_contacts.concatemers)
     threads: 10
+    conda: PORE_C_CONDA_FILE
     shell:
         "pore_c {DASK_SETTINGS} --dask-num-workers {threads} "
         "contacts summarize {input} {output} 2>{log}"

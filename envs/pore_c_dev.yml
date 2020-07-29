@@ -15,7 +15,7 @@ dependencies:
 - numpy >=1.16.1
 - pairtools
 - pandas >=1.0.5
-- pyarrow
+- pyarrow ==1.*
 - pyranges ==0.0.71
 - pysam
 - streamz ==0.*,>=0.5.2
