@@ -1,10 +1,12 @@
+
+
 basecalls: "basecalls.tsv"
 output_dir: "results"
 refgenome:
   refgenome_id: "GRCh38"
   refgenome_path: "resources/GRCh38.fasta.gz"
 
-reads_per_batch: 10000 
+reads_per_batch: 10000
 max_read_length: 100000
 
 matrix_resolutions:
@@ -43,3 +45,7 @@ software:
   sort:
       threads: 10
       memory_per_thread: "4G"
+
+
+
+pore_c_version : 'rel'
