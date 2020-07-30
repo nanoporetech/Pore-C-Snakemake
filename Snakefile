@@ -7,21 +7,23 @@ from snakemake.utils import validate, min_version
 min_version("5.5.4")
 
 
-### Validation of schemas ###
-# validate('config.yaml', schema="schemas/config.schema.yaml")
-##### load config and sample sheets ##
-configfile: "config.yaml"
-
-
 wildcard_constraints:
     enzyme="[^_]+",
     run_id="[^_]+",
     batch_id="batch\d+",
 
 
-PORE_C_CONDA_FILE = "../envs/pore_c_dev.yml"
+### Validation of schemas ###
+##### load config and sample sheets ##
+configfile: "config.yaml"
 
-# validate(config['basecalls'], schema="schemas/basecall.schema.yaml")
+
+if config["pore_c_version"] == "rel":
+    PORE_C_CONDA_FILE = "../envs/pore_c_rel.yml"
+else:
+    assert config["pore_c_version"] == "dev"
+    PORE_C_CONDA_FILE = "../envs/pore_c_dev.yml"
+
 
 basecall_df = pd.read_table(config["basecalls"], comment="#").set_index(["run_id", "enzyme"], drop=False)
 
@@ -82,6 +84,7 @@ rule juicebox:
 
 rule test:
     input:
+        expand_rows(paths.merged_contacts.concatemers, basecall_df),
         expand_rows(paths.matrix.mcool, basecall_df),
         expand_rows(paths.matrix.haplotyped_cools, basecall_df),
         expand_rows(paths.pairs.index, basecall_df),
