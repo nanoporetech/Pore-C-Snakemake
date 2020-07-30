@@ -15,11 +15,12 @@ dependencies:
 - numpy >=1.16.1
 - pairtools
 - pandas >=1.0.5
-- pyarrow ==1.*
+- pyarrow ==1.*,>=1.0.0
+- pydantic ==1.6.1
 - pyranges ==0.0.71
 - pysam
 - streamz ==0.*,>=0.5.2
 - tqdm
 - pip
 - pip:
-    - "-e git+https://github.com/nanoporetech/pore-c.git@v.0.2.0rc1#egg=pore_c"
+    - "-e git+https://github.com/nanoporetech/pore-c.git@v.0.3.0#egg=pore_c"
