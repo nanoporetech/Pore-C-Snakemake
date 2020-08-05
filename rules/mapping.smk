@@ -51,7 +51,7 @@ rule haplotag:
     benchmark:
         to_benchmark(paths.mapping.haplotagged_aligns)
     wrapper:
-        "file:../wrappers/whatshap/haplotag"
+        WRAPPER_PREFIX + "/whatshap/haplotag"
 
 
 def choose_input_bam(wildcards):
