@@ -4,6 +4,8 @@ ACTIVATE_POREC = "set +u; source ~/miniconda3/etc/profile.d/conda.sh ; conda act
 
 DASK_SETTINGS = "--dask-scheduler-port 0"
 
+WRAPPER_PREFIX = f"file:{workflow.basedir}/wrappers"
+
 
 def create_path_accessor(prefix: Path) -> Box:
     """Create a Box to provide '.' access to hierarchy of paths"""
