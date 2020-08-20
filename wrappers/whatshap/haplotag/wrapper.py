@@ -35,7 +35,7 @@ if alignment_count == 0:
     sys.exit(0)
 
 shell(
-    "whatshap haplotag  {snakemake.input.vcf} {snakemake.input.bam} "
+    "whatshap haplotag  {snakemake.params.vcf} {snakemake.input.bam} "
     "--ignore-read-groups -r {snakemake.input.refgenome} "
     "--output-haplotag-list {snakemake.output}  "
     " -o /dev/null "

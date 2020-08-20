@@ -1,10 +1,10 @@
 
-
-basecalls: "basecalls.tsv"
+# paths to config files
+basecalls: "config/basecalls.tsv"
+references: "config/references.tsv"
+phased_vcfs: "config/phased_vcfs.tsv"
+file_layout: "config/file_layout.yaml"
 output_dir: "results"
-refgenome:
-  refgenome_id: "GRCh38"
-  refgenome_path: "resources/GRCh38.fasta.gz"
 
 reads_per_batch: 10000
 max_read_length: 100000
@@ -30,14 +30,14 @@ software:
     tools_url: "https://s3.amazonaws.com/hicfiles.tc4ga.com/public/juicer/juicer_tools_1.19.02.jar"
   bwa:
     cli_opts: "bwasw -b 5 -q 2 -r 1 -T 15 -z 10"
-    threads: 35
+    threads: 10
   pore_c:
     create_alignment_table:
-      threads: 5
+      threads: 1
     to_cooler:
       threads: 10
     to_unsorted_pairs:
-      threads: 10
+      threads: 1
     sort_pairs_file:
       threads: 10
     to_salsa_bed:
@@ -46,6 +46,7 @@ software:
       threads: 10
       memory_per_thread: "4G"
 
+# mapping_query: ""
+mapping_query: ""
+pore_c_version: 'rel'
 
-
-pore_c_version : 'rel'

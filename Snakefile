@@ -13,27 +13,18 @@ wildcard_constraints:
     batch_id="batch\d+",
 
 
+BASE_DIR = Path(workflow.basedir)
+
 ### Validation of schemas ###
 ##### load config and sample sheets ##
-configfile: "config.yaml"
-
-
-if config["pore_c_version"] == "rel":
-    PORE_C_CONDA_FILE = "../envs/pore_c_rel.yml"
-else:
-    assert config["pore_c_version"] == "dev"
-    PORE_C_CONDA_FILE = "../envs/pore_c_dev.yml"
-
-
-basecall_df = pd.read_table(config["basecalls"], comment="#").set_index(["run_id", "enzyme"], drop=False)
-
+configfile: BASE_DIR / "config/config.yaml"
 
 ##### load rules #####
 include: "rules/common.smk" # python helper functions
 
 
-outdir = Path(config["output_dir"])
-paths = create_path_accessor(outdir)
+basecall_df, reference_df, mapping_df = create_config_dataframes()
+paths = create_path_accessor()
 
 
 include: "rules/refgenome.smk" # prepare the reference genome
@@ -53,40 +44,41 @@ include: "rules/exports.smk" # export to alternative formats
 
 rule all:
     input:
-        refgenome=paths.refgenome.catalog,
-        contacts=expand_rows(paths.merged_contacts.concatemers, basecall_df),
+        basecalls=expand_rows(paths.basecall.catalog, basecall_df),
+        refgenome=expand_rows(paths.refgenome.bwt, reference_df),
+        contacts=expand_rows(paths.merged_contacts.concatemers, mapping_df)
 
 
 rule cooler:
     input:
-        expand_rows(paths.matrix.mcool, basecall_df),
+        expand_rows(paths.matrix.mcool, mapping_df),
 
 
 rule haplotyped_cools:
     input:
-        expand_rows(paths.matrix.haplotyped_cools, basecall_df),
+        expand_rows(paths.matrix.haplotyped_cools, mapping_df),
 
 
 rule pairs:
     input:
-        expand_rows(paths.pairs.index, basecall_df),
+        expand_rows(paths.pairs.index, mapping_df),
 
 
 rule salsa:
     input:
-        expand_rows(paths.assembly.salsa_bed, basecall_df),
+        expand_rows(paths.assembly.salsa_bed, mapping_df),
 
 
 rule juicebox:
     input:
-        expand_rows(paths.juicebox.hic, basecall_df),
+        expand_rows(paths.juicebox.hic, mapping_df),
 
 
 rule test:
     input:
-        expand_rows(paths.merged_contacts.concatemers, basecall_df),
-        expand_rows(paths.matrix.mcool, basecall_df),
-        expand_rows(paths.matrix.haplotyped_cools, basecall_df),
-        expand_rows(paths.pairs.index, basecall_df),
-        expand_rows(paths.assembly.salsa_bed, basecall_df),
-        expand_rows(paths.juicebox.hic, basecall_df),
+        expand_rows(paths.merged_contacts.concatemers, mapping_df),
+        expand_rows(paths.matrix.mcool, mapping_df),
+        expand_rows(paths.matrix.haplotyped_cools, mapping_df),
+        expand_rows(paths.pairs.index, mapping_df),
+        expand_rows(paths.assembly.salsa_bed, mapping_df),
+        expand_rows(paths.juicebox.hic, mapping_df),

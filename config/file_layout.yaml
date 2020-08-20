@@ -1,0 +1,45 @@
+align_table:
+    alignment: '{enzyme}_{run_id}_{batch_id}_{refgenome_id}_{phase_set_id}.at.alignment.parquet'
+    pore_c: '{enzyme}_{run_id}_{batch_id}_{refgenome_id}_{phase_set_id}.at.pore_c.parquet'
+contacts:
+    contacts: '{enzyme}_{run_id}_{batch_id}_{refgenome_id}_{phase_set_id}.contacts.parquet'
+merged_contacts:
+    contacts: '{enzyme}_{run_id}_{refgenome_id}_{phase_set_id}.contacts.parquet'
+    concatemers: '{enzyme}_{run_id}_{refgenome_id}_{phase_set_id}.concatemers.parquet'
+    concatemer_summary: '{enzyme}_{run_id}_{refgenome_id}_{phase_set_id}.concatemer_summary.csv'
+basecall:
+    catalog: '{enzyme}_{run_id}.rd.catalog.yaml'
+    fastq: '{enzyme}_{run_id}.rd.{batch_id}.fq.gz'
+    read_metadata: '{enzyme}_{run_id}.rd.read_metadata.parquet'
+    summary: '{enzyme}_{run_id}.rd.summary.csv'
+mapping:
+    coord_sorted_bam: '{enzyme}_{run_id}_{batch_id}_{refgenome_id}.coord_sort.bam'
+    coord_sorted_bai: '{enzyme}_{run_id}_{batch_id}_{refgenome_id}.coord_sort.bam.bai'
+    haplotagged_aligns: '{enzyme}_{run_id}_{batch_id}_{refgenome_id}_{phase_set_id}.haplotagged.txt'
+matrix:
+    cool: '{enzyme}_{run_id}_{refgenome_id}_{phase_set_id}.matrix.cool'
+    haplotyped_cools: '{enzyme}_{run_id}_{refgenome_id}_{phase_set_id}.matrix.haplotyped.cools.done'
+    mcool: '{enzyme}_{run_id}_{refgenome_id}_{phase_set_id}.matrix.mcool'
+pairs:
+    unsorted_pairs: '{enzyme}_{run_id}_{refgenome_id}_{phase_set_id}.unsorted.pairs'
+    pairs: '{enzyme}_{run_id}_{refgenome_id}_{phase_set_id}.sorted.pairs.gz'
+    index: '{enzyme}_{run_id}_{refgenome_id}_{phase_set_id}.sorted.pairs.gz.px2'
+refgenome:
+    catalog: '{refgenome_id}.rg.catalog.yaml'
+    chrom_metadata: '{refgenome_id}.rg.metadata.csv'
+    chromsizes: '{refgenome_id}.rg.chromsizes'
+    fasta: '{refgenome_id}.rg.fa'
+    fai: '{refgenome_id}.rg.fa.fai'
+    bwt: '{refgenome_id}.rg.fa.bwt'
+    fasta_unzipped: '{refgenome_id}.rg.fa'
+    fasta_unzipped_fai: '{refgenome_id}.rg.fa.fai'
+virtual_digest:
+    catalog: '{enzyme}_{refgenome_id}.vd.catalog.yaml'
+    digest_stats: '{enzyme}_{refgenome_id}.vd.digest_stats.csv'
+    fragments: '{enzyme}_{refgenome_id}.vd.fragments.parquet'
+assembly:
+    salsa_bed: '{enzyme}_{run_id}_{refgenome_id}_{phase_set_id}.salsa.bed'
+juicebox:
+    tools: 'juicer_tools.jar'
+    hicref: '{enzyme}_{refgenome_id}.hicRef'
+    hic: '{enzyme}_{run_id}_{refgenome_id}_{phase_set_id}.hic'

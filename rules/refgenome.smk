@@ -1,6 +1,4 @@
 rule add_refgenome:
-    input:
-        config["refgenome"]["refgenome_path"],
     output:
         catalog=paths.refgenome.catalog,
         chrom_metadata=paths.refgenome.chrom_metadata,
@@ -8,8 +6,8 @@ rule add_refgenome:
         fasta=paths.refgenome.fasta,
         fai=paths.refgenome.fai,
     params:
+        fasta=lookup_value("refgenome_path", reference_df),
         prefix=to_prefix(paths.refgenome.catalog),
-        genome_id=config["refgenome"]["refgenome_id"],
     log:
         to_log(paths.refgenome.catalog),
     benchmark:
@@ -19,7 +17,7 @@ rule add_refgenome:
         PORE_C_CONDA_FILE
     shell:
         "pore_c {DASK_SETTINGS} --dask-num-workers {threads} "
-        "refgenome prepare {input} {params.prefix} --genome-id {params.genome_id} 2> {log}"
+        "refgenome prepare {params.fasta} {params.prefix} --genome-id {wildcards.refgenome_id} 2> {log}"
 
 
 rule virtual_digest:
