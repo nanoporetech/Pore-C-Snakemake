@@ -54,20 +54,6 @@ rule haplotag:
         WRAPPER_PREFIX + "/whatshap/haplotag"
 
 
-def choose_input_bam(wildcards):
-    if is_phased(wildcards):
-        return paths.mapping.haplotagged_bam
-    else:
-        return paths.mapping.coord_sorted_bam
-
-
-def porec_phased_flag(wildcards):
-    if is_phased(wildcards):
-        return "--phased "
-    else:
-        return " "
-
-
 rule create_alignment_table:
     input:
         bam=paths.mapping.coord_sorted_bam,
@@ -136,11 +122,22 @@ def expand_basecall_batches(path):
     return inner
 
 
+rule create_contact_fofn:
+    output:
+        paths.merged_contacts.fofn,
+    input:
+        expand_basecall_batches(paths.contacts.contacts),
+    run:
+        with open(output[0], 'w') as fh:
+            fh.write("{}\n".format("\n".join(input)))
+
+
+
 rule merge_contact_files:
     output:
         directory(paths.merged_contacts.contacts),
     input:
-        expand_basecall_batches(paths.contacts.contacts),
+        paths.merged_contacts.fofn,
     log:
         to_log(paths.merged_contacts.contacts),
     benchmark:
@@ -150,7 +147,7 @@ rule merge_contact_files:
         PORE_C_CONDA_FILE
     shell:
         "pore_c {DASK_SETTINGS} --dask-num-workers {threads} "
-        "contacts merge {input} {output}"
+        "contacts merge {input} {output} --fofn"
 
 
 rule summarise_contacts:
