@@ -24,4 +24,4 @@ dependencies:
 - pip
 - pip:
     #- "-e git+https://github.com/nanoporetech/pore-c.git@v.0.2.0rc1#egg=pore_c"
-    - "-e ../../../../pore-c"
+    - "-e ../../../pore-c"

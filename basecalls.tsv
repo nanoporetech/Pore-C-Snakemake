@@ -1,2 +1,0 @@
-run_id	enzyme	biospecimen	fastq_path	vcf_path
-run01	NlaIII	GM12878	resources/GM12878_NlaIII_reads.fq.gz	resources/GM12878.phased.conf.vcf.gz

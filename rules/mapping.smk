@@ -29,7 +29,7 @@ rule align_bwa:
 
 
 def is_phased(wildcards):
-    vcf = lookup_value("vcf_path", basecall_df)(wildcards).strip()
+    vcf = lookup_value("vcf_path", mapping_df)(wildcards).strip()
     if vcf:
         return True
     else:
@@ -42,9 +42,9 @@ rule haplotag:
     input:
         bam=paths.mapping.coord_sorted_bam,
         bai=paths.mapping.coord_sorted_bai,
-        vcf=lookup_value("vcf_path", basecall_df),
         refgenome=paths.refgenome.fasta_unzipped,
     params:
+        vcf=lookup_value("vcf_path", mapping_df),
         is_phased=is_phased, #conda: "../envs/whatshap.yml"
     log:
         to_log(paths.mapping.haplotagged_aligns),
@@ -117,7 +117,7 @@ rule to_contacts:
         to_benchmark(paths.contacts.contacts)
     conda:
         PORE_C_CONDA_FILE
-    threads: 10
+    threads: 1
     shell:
         "pore_c {DASK_SETTINGS} --dask-num-workers {threads} "
         "alignments to-contacts {input} {output.contacts} 2>{log}"
@@ -130,7 +130,7 @@ def expand_basecall_batches(path):
         glob_path = expand(paths.basecall.fastq, **wildcards, allow_missing=True)
         _ = glob_wildcards(glob_path[0])
         batch_id = sorted([b for b in _.batch_id if b != "fail"], key=lambda x: int(x.replace("batch", "")))
-        res = expand(str(path), enzyme=[wildcards.enzyme], run_id=[wildcards.run_id], batch_id=batch_id)
+        res = expand(str(path), enzyme=[wildcards.enzyme], refgenome_id=[wildcards.refgenome_id], phase_set_id=[wildcards.phase_set_id], run_id=[wildcards.run_id], batch_id=batch_id)
         return res
 
     return inner
@@ -155,9 +155,11 @@ rule merge_contact_files:
 
 rule summarise_contacts:
     output:
-        paths.merged_contacts.concatemers,
+        pq=paths.merged_contacts.concatemers,
+        csv=paths.merged_contacts.concatemer_summary,
     input:
-        paths.merged_contacts.contacts,
+        contacts=paths.merged_contacts.contacts,
+        read_summary=paths.basecall.summary,
     log:
         to_log(paths.merged_contacts.concatemers),
     benchmark:
@@ -167,4 +169,4 @@ rule summarise_contacts:
         PORE_C_CONDA_FILE
     shell:
         "pore_c {DASK_SETTINGS} --dask-num-workers {threads} "
-        "contacts summarize {input} {output} 2>{log}"
+        "contacts summarize {input.contacts} {input.read_summary} {output.pq} {output.csv} 2>{log}"

@@ -3,5 +3,5 @@ dask-worker-space
 .test/.snakemake
 .test/results/*
 .snakemake
-results/*
+results*
 default.profraw

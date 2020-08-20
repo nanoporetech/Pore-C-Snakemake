@@ -4,3 +4,4 @@ channels:
     - defaults
 dependencies:
     - whatshap ==1.0
+    - samtools ==1.10.0
