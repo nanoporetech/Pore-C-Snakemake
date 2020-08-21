@@ -174,3 +174,26 @@ rule create_hic:
         "../envs/juicer_tools.yml"
     shell:
         "java -Xmx2g -jar {input.tools} pre {input.pairs} {output} {input.chromsizes} -f {input.hicref} &>{log}"
+
+
+rule to_mnd:
+    output:
+        paths.juicebox.mnd
+    input:
+        contacts=paths.merged_contacts.contacts,
+        refgenome=paths.refgenome.fasta,
+    params:
+        prefix=to_prefix(paths.juicebox.mnd),
+    log:
+        to_log(paths.juicebox.mnd),
+    benchmark:
+        to_benchmark(paths.juicebox.mnd)
+    threads: 1
+    conda:
+        PORE_C_CONDA_FILE
+    shell:
+        "pore_c {DASK_SETTINGS} --dask-num-workers {threads} "
+        " contacts export {input.contacts} merged_no_dups {params.prefix} --reference-fasta {input.refgenome} 2>{log}"
+
+
+
