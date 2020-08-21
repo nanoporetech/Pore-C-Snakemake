@@ -99,3 +99,22 @@ def lookup_value(column, df):
             return row[column].values[0]
 
     return _inner
+
+def lookup_json(columns, df):
+    """Use wildcards to 'lookup' a value in a dataframe. The wildcard keys must
+    match the dataframe index. Return the row as single-line json string
+    """
+    index_names = tuple(df.index.names)
+
+    for column in df.columns:
+        assert column in df.columns, column
+
+    def _inner(wildcards):
+        #print(df)
+        if df.index.nlevels == 1:
+            row = df.loc[wildcards[index_names[0]], :]
+        else:
+            row = df.xs(tuple(wildcards[k] for k in index_names), level=index_names, drop_level=True)
+        assert len(row) == 1, row
+        return row.iloc[0,:][columns].to_json()
+    return _inner

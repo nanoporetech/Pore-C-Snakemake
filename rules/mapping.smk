@@ -157,6 +157,8 @@ rule summarise_contacts:
     input:
         contacts=paths.merged_contacts.contacts,
         read_summary=paths.basecall.summary,
+    params:
+        metadata = lookup_json(['run_id', 'enzyme', 'biospecimen', 'refgenome_id', 'phase_set_id'], mapping_df)
     log:
         to_log(paths.merged_contacts.concatemers),
     benchmark:
@@ -166,4 +168,5 @@ rule summarise_contacts:
         PORE_C_CONDA_FILE
     shell:
         "pore_c {DASK_SETTINGS} --dask-num-workers {threads} "
-        "contacts summarize {input.contacts} {input.read_summary} {output.pq} {output.csv} 2>{log}"
+        "contacts summarize {input.contacts} {input.read_summary} {output.pq} {output.csv} "
+        "--user-metadata '{params.metadata}' 2>{log}"
