@@ -73,6 +73,11 @@ rule juicebox:
     input:
         expand_rows(paths.juicebox.hic, mapping_df),
 
+rule mnd:
+    input:
+        expand_rows(paths.juicebox.mnd, mapping_df),
+
+
 
 rule test:
     input:
@@ -82,3 +87,4 @@ rule test:
         expand_rows(paths.pairs.index, mapping_df),
         expand_rows(paths.assembly.salsa_bed, mapping_df),
         expand_rows(paths.juicebox.hic, mapping_df),
+        expand_rows(paths.juicebox.mnd, mapping_df),

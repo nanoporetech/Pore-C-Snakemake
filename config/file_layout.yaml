@@ -44,3 +44,4 @@ juicebox:
     tools: 'juicer_tools.jar'
     hicref: '{enzyme}_{refgenome_id}.hicRef'
     hic: '{enzyme}_{run_id}_{refgenome_id}_{phase_set_id}.hic'
+    mnd: '{enzyme}_{run_id}_{refgenome_id}_{phase_set_id}.mnd.txt'
