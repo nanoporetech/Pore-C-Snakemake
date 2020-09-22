@@ -1,12 +1,18 @@
 
-# paths to config files
+# paths to config files, note that these paths are relative to the snakemake work directory (-d flag)
 basecalls: "config/basecalls.tsv"
 references: "config/references.tsv"
 phased_vcfs: "config/phased_vcfs.tsv"
 file_layout: "config/file_layout.yaml"
+
+
 output_dir: "results"
 
-reads_per_batch: 10000
+# a run will be split into batches of this size at the start of a pipeline in order
+# to permit parallel execution. Warning - if this is set too low then snakemake can
+# start to become sluggish.
+reads_per_batch: 50000
+# reads longer than this are filtered out (they can cause bwa-sw to crash)
 max_read_length: 100000
 
 matrix_resolutions:

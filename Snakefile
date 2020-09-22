@@ -54,11 +54,6 @@ rule cooler:
         expand_rows(paths.matrix.mcool, mapping_df),
 
 
-rule haplotyped_cools:
-    input:
-        expand_rows(paths.matrix.haplotyped_cools, mapping_df),
-
-
 rule pairs:
     input:
         expand_rows(paths.pairs.index, mapping_df),
@@ -69,7 +64,7 @@ rule salsa:
         expand_rows(paths.assembly.salsa_bed, mapping_df),
 
 
-rule juicebox:
+rule juicer:
     input:
         expand_rows(paths.juicebox.hic, mapping_df),
 
@@ -83,7 +78,7 @@ rule test:
     input:
         expand_rows(paths.merged_contacts.concatemers, mapping_df),
         expand_rows(paths.matrix.mcool, mapping_df),
-        expand_rows(paths.matrix.haplotyped_cools, mapping_df),
+        #expand_rows(paths.matrix.haplotyped_cools, mapping_df),
         expand_rows(paths.pairs.index, mapping_df),
         expand_rows(paths.assembly.salsa_bed, mapping_df),
         expand_rows(paths.juicebox.hic, mapping_df),

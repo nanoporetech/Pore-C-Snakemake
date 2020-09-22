@@ -9,10 +9,12 @@ OUTDIR = Path(config['output_dir'])
 
 
 if config["pore_c_version"] == "rel":
-    PORE_C_CONDA_FILE = "../envs/pore_c_rel.yml"
+    PORE_C_CONDA_FILE = "../envs/pore_c.yml"
 else:
+    # if running in development mode then we expect pore_c to be installed in the
+    # environment that contains the snakemake command
     assert config["pore_c_version"] == "dev"
-    PORE_C_CONDA_FILE = "../envs/pore_c_dev.yml"
+    PORE_C_CONDA_FILE = ""
 
 
 
