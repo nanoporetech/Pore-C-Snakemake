@@ -59,7 +59,7 @@ positional arguments:
     clean        Remove unused packages and caches.
     config       Modify configuration values in .condarc. This is modeled
                  after the git config command. Writes to the user .condarc
-                 file (/Users/prughani/.condarc) by default.
+                 file ($HOME/.condarc) by default.
     create       Create a new conda environment from a list of specified
                  packages.
 ..............
@@ -82,28 +82,26 @@ conda activate pore_c_snakemake
 
 ---
 
-#### Installing Pore-C tools
-
-The [Pore-C tools](https://github.com/nanoporetech/pore-c) package required to run this pipeline. They are not yet available through conda so we have to create an environment manually.
-
-```
-git clone https://github.com/nanoporetech/pore-c.git
-cd pore-c
-conda env create
-pip install -e .
-```
-***********
-
-
 # 3. Usage
+
+#### Testing:
+
+Test data is included in the `.test` subfolder (`git-lfs` is required to download them). To run the tests use
+
+    snakemake --use-conda  test -j 4 --config=output_dir=results.test
+
+The results of the test run will appear in the `results.test` directory.
 
 #### Configure workflow:
 
-Configure the workflow according to your needs via editing the file `config.yaml`. At the very least you need to provide a path to a reference genome.
+The pipeline configuration is split across several files:
 
-#### Add basecall location:
 
-Add the locations of your fastq files to `basecall.tsv`. The run IDs must *not* contain any spaces or special characters.
+    *  `config/config.yaml` - A yaml file containing settings for the pipeline. Input data is specified in the following tab-delimited files.
+    *  `config/basecall.tsv` - Metadata and locations of the pore-c sequencing run fastqs.
+    *  `config/references.tsv` - Locations of the draft/scaffold/reference assemblies that the pore-c reads will be mapped to.
+    *  `config/phased_vcfs.tsv` - [Optional] The location of phased vcf files that can be used to haplotag poreC reads.
+
 
 #### Execute workflow:
 
@@ -123,27 +121,29 @@ or
 
     snakemake --use-conda --drmaa --jobs 100
 
-in combination with any of the modes above.
-See the [Snakemake documentation](https://snakemake.readthedocs.io/en/stable/executable.html) for further details.
-
-The snakemake pipeline come with two optional targets: i) `salsa_bed` to create a bed file compatible with salsa2 and ii) `juicebox` which will create files compatible with the juicebox suite of tools.
+in combination with any of the modes above.  See the [Snakemake documentation](https://snakemake.readthedocs.io/en/stable/executable.html) for further details.
 
 
-```
-snakemake --use-conda salsa2_bed
-snakemake --use-conda juicebox
-```
 
-### Testing:
+#### Workflow targets
 
-Test cases are in the subfolder `.test`. To run the tests use
+The pipeline defines several targets that can be speficied on the command line:
 
-    snakemake --use-conda  -d .test all salsa_bed  juicebox
+*  **all:**  The default target which builds the `pore_c` contact and concatemer parquet files under the `merged_contacts` directory.
+*  **cooler:**  Builds a multi-resolution `.mcool` file.
+*  **pairs:**  Builds a `pairix`-indexed pairs file.
+*  **juicer:**  Builds a `.hic` file compatible with the `juicebox` suite of tools.
+*  **salsa:**  Builds a `.bed` file for use with the `salsa2` scaffolding tool.
+*  **mnd:**  Builds a `.mnd.txt` file compatible with the `3d-dna` scaffolding tool [experimental].
 
 
-These require [git lfs](https://github.com/git-lfs/git-lfs/wiki/Installation) to be installed.
+To build the files for a particular target:
 
-# 4. Output files
+    snakemake --use-conda -j 8 <target>
+
+
+
+# 4. Output files [TODO: needs to be updated]
 Once the pipeline has run successfully you should expect the following files in the output directory:
 
 *  **`align_table/`:**
@@ -182,7 +182,6 @@ Once the pipeline has run successfully you should expect the following files in 
     *   `*.hicRef` - *optional* a [restriction site format](https://github.com/aidenlab/juicer/wiki/Pre#restriction-site-file-format) file.
     *   `*.hic.txt` - *optional* a [hic medium format](https://github.com/aidenlab/juicer/wiki/Pre#medium-format-most-common) file of pairwise contacts.
 
-# 5. Help
 
 #### License and Copyright:
 © 2019 Oxford Nanopore Technologies Ltd.

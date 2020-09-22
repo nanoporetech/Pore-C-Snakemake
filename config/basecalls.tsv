@@ -1,2 +1,9 @@
+# basecalls.tsv - one entry per run/flowcell
+# run_id: A unique id for this run, it's best to avoid special characters
+# enzyme: The case-sensitive name of the enzyme used, must be in biopython's list
+# refgenome_ids: A comma-separated list of refgenome_ids, must match those provided in the references.tsv file
+# biospecimen: An id for the sample (required if using the haplotype-aware version of the pipeline).
+# fastq_path: Path to a fastq file containing the reads for this run. If a relative path is given then it is relative to the snakemake workdir
 run_id	enzyme	refgenome_ids	biospecimen	fastq_path
 run01	NlaIII	GRCh38	GM12878	.test/resources/GM12878_NlaIII_reads.fq.gz
+run02	NlaIII	draft1	GM12878	.test/resources/GM12878_NlaIII_reads.fq.gz

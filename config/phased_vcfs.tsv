@@ -1,2 +1,7 @@
+# phased_vcfs.tsv - entries in this file are optional, if a sample has phased variants on a reference genome then you can add an entry here
+# phase_set_id: An id for the phased variants used. This can be used to distinguish between different phased variant sets for the same sample if available.
+# refgenome_id: The reference genome the phased variants were called on, must match an entry in references.tsv
+# biospecimen: The sample the phased variants come from, must match corresponding entry in basecalls.tsv
+# vcf_path: Path to a tabix-indexed VCF file with phased variants.
 phase_set_id	refgenome_id	biospecimen	vcf_path
 GIAB	GRCh38	GM12878	.test/resources/GM12878.phased.conf.vcf.gz

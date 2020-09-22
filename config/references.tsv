@@ -1,2 +1,6 @@
+# references.tsv - One entry per genome assembly (eg reference genome, draft genome assembly or scaffold).
+# refgenome_id: A unique id to identify the reference/assmembly/scaffold you're mapping against
+# refgenome_path: The path of the source fasta path. If a relative path is given then it is relative to the snakemake workdir
 refgenome_id	refgenome_path
 GRCh38	.test/resources/GRCh38.fasta.gz
+draft1	.test/resources/GRCh38.fasta.gz
