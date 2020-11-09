@@ -9,5 +9,6 @@ rule import_basecalls:
         prefix = to_prefix(paths.basecall.catalog)
     log: to_log(paths.basecall.catalog)
     benchmark: to_benchmark(paths.basecall.catalog)
+    conda: "../envs/porec.yml"
     shell:
-        "{ACTIVATE_POREC} pore_c reads catalog  {params.fname} {params.prefix} 2> {log}"
+        "pore_c reads catalog  {params.fname} {params.prefix} 2> {log}"

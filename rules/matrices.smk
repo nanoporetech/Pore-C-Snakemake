@@ -10,8 +10,9 @@ rule create_base_matrix:
     benchmark: to_benchmark(paths.matrix.catalog)
     log: to_log(paths.matrix.catalog)
     threads: 1
+    conda: "../envs/porec.yml"
     shell:
-        "{ACTIVATE_POREC} pore_c pairs to-matrix {input} {params.prefix} -r {params.resolution} -n {threads} 2>{log}"
+        "pore_c pairs to-matrix {input} {params.prefix} -r {params.resolution} -n {threads} 2>{log}"
 
 
 rule create_base_cooler_file:

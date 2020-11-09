@@ -11,8 +11,9 @@ rule add_refgenome:
         genome_id=config['refgenome']['refgenome_id']
     log: to_log(paths.refgenome.catalog)
     benchmark: to_benchmark(paths.refgenome.catalog)
+    conda: "../envs/porec.yml"
     shell:
-        "{ACTIVATE_POREC} pore_c refgenome catalog {input} {params.prefix} --genome-id {params.genome_id} 2> {log}"
+        "pore_c refgenome catalog {input} {params.prefix} --genome-id {params.genome_id} 2> {log}"
 
 rule virtual_digest:
     input:
@@ -26,8 +27,9 @@ rule virtual_digest:
     benchmark: to_benchmark(paths.virtual_digest.catalog)
     log: to_log(paths.virtual_digest.catalog)
     threads: 10
+    conda: "../envs/porec.yml"
     shell:
-        "{ACTIVATE_POREC} pore_c refgenome virtual-digest {input} enzyme:{wildcards.enzyme} {params.prefix} -n {threads} 2> {log}"
+        "pore_c refgenome virtual-digest {input} enzyme:{wildcards.enzyme} {params.prefix} -n {threads} 2> {log}"
 
 rule bwa_index_refgenome:
     input:

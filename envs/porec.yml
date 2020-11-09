@@ -1,0 +1,34 @@
+name: poreC
+channels:
+  - conda-forge
+  - bioconda
+  - r
+  - defaults
+dependencies:
+  - python>=3.6
+  - snakemake
+  - coreutils
+  - pairtools
+  - pairix
+  - tabix
+  - intake
+  - intake-parquet
+  - streamz
+  - pyarrow
+  - ncls
+  - cooler
+  - tqdm
+  - pysam
+  - biopython
+  - click
+  - numpy
+  - pandas
+  - pytest
+  - pip
+  - pylama
+  - pylint
+  - black
+  - sphinx
+  - sphinx-autodoc-typehints
+  - pip:
+    - git+https://github.com/nanoporetech/pore-c.git

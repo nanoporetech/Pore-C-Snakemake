@@ -33,5 +33,6 @@ rule create_alignment_table:
     log: to_log(paths.align_table.catalog)
     benchmark: to_benchmark(paths.align_table.catalog)
     threads: config['software']['pore_c']['create_alignment_table']['threads']
+    conda: "../envs/porec.yml"
     shell:
-        "{ACTIVATE_POREC} pore_c alignments parse {input.bam} {input.virtual_digest} {params.prefix} -n {threads} 2>{log}"
+        "pore_c alignments parse {input.bam} {input.virtual_digest} {params.prefix} -n {threads} 2>{log}"
