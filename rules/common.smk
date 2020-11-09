@@ -1,6 +1,5 @@
 from box import Box
 
-# ACTIVATE_POREC = "set +u; source ~/miniconda3/etc/profile.d/conda.sh ; conda activate ; conda activate poreC; "
 
 def create_path_accessor(prefix: Path) -> Box:
     """Create a Box to provide '.' access to heirarchy of paths"""

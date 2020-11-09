@@ -82,18 +82,6 @@ conda activate pore_c_snakemake
 
 --- 
 
-#### Installing Pore-C tools
-
-The [Pore-C tools](https://github.com/nanoporetech/pore-c) package required to run this pipeline. They are not yet available through conda so we have to create an environment manually.
-
-```
-git clone https://github.com/nanoporetech/pore-c.git
-cd pore-c
-conda env create
-pip install -e .
-```
-***********
-
 
 # 3. Usage
 
