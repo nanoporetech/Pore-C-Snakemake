@@ -28,6 +28,7 @@ dependencies:
   - pylama
   - pylint
   - black
+  - python-snappy
   - sphinx
   - sphinx-autodoc-typehints
   - pip:
