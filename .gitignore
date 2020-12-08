@@ -5,3 +5,6 @@ dask-worker-space
 .snakemake
 results*
 default.profraw
+.venv
+.tox
+dask-worker-space

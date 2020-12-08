@@ -116,7 +116,14 @@ def expand_basecall_batches(path):
         glob_path = expand(paths.basecall.fastq, **wildcards, allow_missing=True)
         _ = glob_wildcards(glob_path[0])
         batch_id = sorted([b for b in _.batch_id if b != "fail"], key=lambda x: int(x.replace("batch", "")))
-        res = expand(str(path), enzyme=[wildcards.enzyme], refgenome_id=[wildcards.refgenome_id], phase_set_id=[wildcards.phase_set_id], run_id=[wildcards.run_id], batch_id=batch_id)
+        res = expand(
+            str(path),
+            enzyme=[wildcards.enzyme],
+            refgenome_id=[wildcards.refgenome_id],
+            phase_set_id=[wildcards.phase_set_id],
+            run_id=[wildcards.run_id],
+            batch_id=batch_id,
+        )
         return res
 
     return inner
@@ -128,9 +135,8 @@ rule create_contact_fofn:
     input:
         expand_basecall_batches(paths.contacts.contacts),
     run:
-        with open(output[0], 'w') as fh:
+        with open(output[0], "w") as fh:
             fh.write("{}\n".format("\n".join(input)))
-
 
 
 rule merge_contact_files:
@@ -158,7 +164,7 @@ rule summarise_contacts:
         contacts=paths.merged_contacts.contacts,
         read_summary=paths.basecall.summary,
     params:
-        metadata = lookup_json(['run_id', 'enzyme', 'biospecimen', 'refgenome_id', 'phase_set_id'], mapping_df)
+        metadata=lookup_json(["run_id", "enzyme", "biospecimen", "refgenome_id", "phase_set_id"], mapping_df),
     log:
         to_log(paths.merged_contacts.concatemers),
     benchmark:
