@@ -178,7 +178,7 @@ rule create_hic:
 
 rule to_mnd:
     output:
-        paths.juicebox.mnd
+        paths.juicebox.mnd,
     input:
         contacts=paths.merged_contacts.contacts,
         refgenome=paths.refgenome.fasta,
@@ -194,6 +194,3 @@ rule to_mnd:
     shell:
         "pore_c {DASK_SETTINGS} --dask-num-workers {threads} "
         " contacts export {input.contacts} merged_no_dups {params.prefix} --reference-fasta {input.refgenome} 2>{log}"
-
-
-
