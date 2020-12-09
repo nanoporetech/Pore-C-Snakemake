@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pore-c-snakemake"
-version = "0.3.0-rc.1"
+version = "0.2.0"
 description = "A snakemake pipeline to run the pore-c tool suite"
 authors = ["Eoghan Harrington <eoghan.harrington@nanoporetech.com>"]
 
