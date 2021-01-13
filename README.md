@@ -121,7 +121,7 @@ or
 
     snakemake --use-conda --drmaa --jobs 100
 
-in combination with any of the modes above.  See the [Snakemake documentation](https://snakemake.readthedocs.io/en/stable/executable.html) for further details.
+in combination with any of the modes above.  See the [Snakemake documentation](https://snakemake.readthedocs.io/en/stable/executing/cli.html) for further details.
 
 
 
