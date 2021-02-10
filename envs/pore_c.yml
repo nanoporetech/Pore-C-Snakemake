@@ -1,7 +1,7 @@
 channels:
-- defaults
 - conda-forge
 - bioconda
+- defaults
 dependencies:
 - pore-c==0.3.0
 
