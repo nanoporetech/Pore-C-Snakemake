@@ -9,11 +9,7 @@ repos:
     -   id: check-yaml
     -   id: no-commit-to-branch
         args: [--branch, master]
--   repo: local
+-   repo: https://github.com/snakemake/snakefmt
+    rev: 0.4.0
     hooks:
-    - id: snakefmt
-      name: snakefmt
-      entry: .tox/pre-commit/bin/snakefmt
-      language: system
-      files: (\.(smk|py)$|^Snakefile)
-      types: [text]
+      - id: snakefmt

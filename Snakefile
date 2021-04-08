@@ -22,17 +22,18 @@ configfile: BASE_DIR / "config/config.yaml"
 
 
 ##### load rules #####
-include: "rules/common.smk" # python helper functions
+include: "rules/common.smk"  # python helper functions
 
 
 basecall_df, reference_df, mapping_df = create_config_dataframes()
 paths = create_path_accessor()
 
 
-include: "rules/refgenome.smk" # prepare the reference genome
-include: "rules/reads.smk" # import fastqs
-include: "rules/mapping.smk" # map and process resulting alignments
-include: "rules/exports.smk" # export to alternative formats
+include: "rules/refgenome.smk"  # prepare the reference genome
+include: "rules/reads.smk"  # import fastqs, fast5s, sequencing summary
+include: "rules/mapping.smk"  # map and process resulting alignments
+include: "rules/exports.smk"  # export to alternative formats
+include: "rules/methylation.smk"  # use f5c to call cpg methylation
 
 
 ##### output paths #####
@@ -70,10 +71,21 @@ rule mnd:
         expand_rows(paths.juicebox.mnd, mapping_df),
 
 
+rule f5c_indexes:
+    # Create f5c indexes, but do not call methylation
+    input:
+        expand_rows(paths.basecall.f5c_index_all, mapping_df),
+
+
+rule methylation:
+    input:
+        expand_rows(paths.methylation.per_locus_methylation, mapping_df),
+
+
 rule test:
     input:
         expand_rows(paths.merged_contacts.concatemers, mapping_df),
-        expand_rows(paths.matrix.mcool, mapping_df), #expand_rows(paths.matrix.haplotyped_cools, mapping_df),
+        expand_rows(paths.matrix.mcool, mapping_df),  #expand_rows(paths.matrix.haplotyped_cools, mapping_df),
         expand_rows(paths.pairs.index, mapping_df),
         expand_rows(paths.assembly.salsa_bed, mapping_df),
         expand_rows(paths.juicebox.hic, mapping_df),

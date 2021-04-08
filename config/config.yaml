@@ -51,6 +51,23 @@ software:
   sort:
       threads: 10
       memory_per_thread: "4G"
+  f5c:
+      version: "v0.4"
+      tools_url: "https://github.com/hasindu2008/f5c/releases/download/v0.4/f5c-v0.4-binaries.tar.gz"
+      gpu_binary: "bin/f5c/f5c-v0.4/f5c_x86_64_linux_cuda"
+      cpu_binary: "bin/f5c/f5c-v0.4/f5c_x86_64_linux"
+      # GPU settings
+      binary: "bin/f5c/f5c-v0.4/f5c_x86_64_linux_cuda"
+      threads: 8
+      gpus: 1
+      cli_opts: "--cuda-dev-id 0 --cuda-mem-frac 0.7"
+      # CPU settings
+      # binary: "bin/f5c/f5c-v0.4/f5c_x86_64_linux"
+      # threads: 20
+      # gpus: 0
+      # cli_opts: ""
+
+
 
 # mapping_query: ""
 mapping_query: ""

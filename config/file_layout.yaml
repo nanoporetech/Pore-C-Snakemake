@@ -8,15 +8,27 @@ merged_contacts:
     contacts: '{enzyme}_{run_id}_{refgenome_id}_{phase_set_id}.contacts.parquet'
     concatemers: '{enzyme}_{run_id}_{refgenome_id}_{phase_set_id}.concatemers.parquet'
     concatemer_summary: '{enzyme}_{run_id}_{refgenome_id}_{phase_set_id}.concatemer_summary.csv'
+fast5:
+    fast5: '{enzyme}_{run_id}.fast5'
+    seq_summary: '{enzyme}_{run_id}.seq_summary.txt'
+    seq_summary_pf: '{enzyme}_{run_id}.seq_summary.pf.txt'
 basecall:
     catalog: '{enzyme}_{run_id}.rd.catalog.yaml'
     fastq: '{enzyme}_{run_id}.rd.{batch_id}.fq.gz'
     read_metadata: '{enzyme}_{run_id}.rd.read_metadata.parquet'
     summary: '{enzyme}_{run_id}.rd.summary.csv'
+    seq_summary: '{enzyme}_{run_id}.seq_summary.txt'
+    f5c_index: '{enzyme}_{run_id}.rd.{batch_id}.fq.gz.index'
+    f5c_fai: '{enzyme}_{run_id}.rd.{batch_id}.fq.gz.index.fai'
+    f5c_gzi: '{enzyme}_{run_id}.rd.{batch_id}.fq.gz.index.gzi'
+    f5c_readdb: '{enzyme}_{run_id}.rd.{batch_id}.fq.gz.index.readdb'
+    f5c_index_all: '{enzyme}_{run_id}_{refgenome_id}_{phase_set_id}.f5c_index_complete'
 mapping:
     coord_sorted_bam: '{enzyme}_{run_id}_{batch_id}_{refgenome_id}.coord_sort.bam'
     coord_sorted_bai: '{enzyme}_{run_id}_{batch_id}_{refgenome_id}.coord_sort.bam.bai'
     haplotagged_aligns: '{enzyme}_{run_id}_{batch_id}_{refgenome_id}_{phase_set_id}.haplotagged.txt'
+    filtered_bam: '{enzyme}_{run_id}_{batch_id}_{refgenome_id}_{phase_set_id}.filtered.bam'
+    filtered_bai: '{enzyme}_{run_id}_{batch_id}_{refgenome_id}_{phase_set_id}.filtered.bam.bai'
 matrix:
     cool: '{enzyme}_{run_id}_{refgenome_id}_{phase_set_id}.matrix.cool'
     haplotyped_cools: '{enzyme}_{run_id}_{refgenome_id}_{phase_set_id}.matrix.haplotyped.cools.done'
@@ -45,3 +57,7 @@ juicebox:
     hicref: '{enzyme}_{refgenome_id}.hicRef'
     hic: '{enzyme}_{run_id}_{refgenome_id}_{phase_set_id}.hic'
     mnd: '{enzyme}_{run_id}_{refgenome_id}_{phase_set_id}.mnd.txt'
+methylation:
+    per_read_llr: '{enzyme}_{run_id}_{batch_id}_{refgenome_id}_{phase_set_id}.per_read_llr.tsv'
+    combined_read_llr: '{enzyme}_{run_id}_{refgenome_id}_{phase_set_id}.combined.per_read_llr.tsv'
+    per_locus_methylation: '{enzyme}_{run_id}_{refgenome_id}_{phase_set_id}.methylation_frequencies.tsv'
