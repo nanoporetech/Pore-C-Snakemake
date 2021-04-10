@@ -61,3 +61,6 @@ methylation:
     per_read_llr: '{enzyme}_{run_id}_{batch_id}_{refgenome_id}_{phase_set_id}.per_read_llr.tsv'
     combined_read_llr: '{enzyme}_{run_id}_{refgenome_id}_{phase_set_id}.combined.per_read_llr.tsv'
     per_locus_methylation: '{enzyme}_{run_id}_{refgenome_id}_{phase_set_id}.methylation_frequencies.tsv'
+binaries:
+    f5c_cpu: "f5c_x86_64_linux"
+    f5c_gpu: "f5c_x86_64_linux_cuda"

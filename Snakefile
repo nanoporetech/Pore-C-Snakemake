@@ -85,6 +85,7 @@ rule methylation:
 rule test:
     input:
         expand_rows(paths.merged_contacts.concatemers, mapping_df),
+        expand_rows(paths.methylation.per_locus_methylation, mapping_df),
         expand_rows(paths.matrix.mcool, mapping_df),  #expand_rows(paths.matrix.haplotyped_cools, mapping_df),
         expand_rows(paths.pairs.index, mapping_df),
         expand_rows(paths.assembly.salsa_bed, mapping_df),
