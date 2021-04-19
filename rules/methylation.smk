@@ -49,6 +49,7 @@ rule f5c_index:
     input:
         fast5=paths.fast5.fast5,
         fastq=paths.basecall.fastq,
+        summary=paths.fast5.seq_summary_pf,
         binary=paths.binaries[f"f5c_{f5c_mode}"],
     output:
         index=paths.basecall.f5c_index,
@@ -61,7 +62,7 @@ rule f5c_index:
         to_log(paths.basecall.f5c_index),
     shell:
         """
-        {input.binary} index -d {input.fast5} {input.fastq} 2>{log}
+        {input.binary} index -d {input.fast5} -s {input.summary} {input.fastq} 2>{log}
         """
 
 
