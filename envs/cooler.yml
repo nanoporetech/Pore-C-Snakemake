@@ -2,4 +2,4 @@ channels:
     - conda-forge
     - bioconda
 dependencies:
-    - cooler==0.8.5
+    - cooler==0.8.11

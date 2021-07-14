@@ -1,0 +1,3 @@
+[submodule "submodules/pore-c"]
+	path = submodules/pore-c
+	url = git@github.com:nanoporetech/pore-c.git

@@ -8,6 +8,12 @@ authors = ["Eoghan Harrington <eoghan.harrington@nanoporetech.com>"]
 line-length = 120
 include = '\.smk$|^Snakefile|\.py$'
 
+
+[tool.commitizen]
+name = "cz_conventional_commits"
+version = "0.2.0"
+tag_format = "0.2.0"
+
 [build-system]
 requires = [
     "setuptools >= 40.0.4",
