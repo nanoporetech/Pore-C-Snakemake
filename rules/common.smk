@@ -1,6 +1,6 @@
 from box import Box
 
-ACTIVATE_POREC = "set +u; source ~/miniconda3/etc/profile.d/conda.sh ; conda activate ; conda activate poreC; "
+ACTIVATE_POREC = "set +u; source ~/miniconda2/etc/profile.d/conda.sh ; conda activate ; conda activate poreC; "
 
 DASK_SETTINGS = "--dask-scheduler-port 0"
 WRAPPER_PREFIX = f"file:{workflow.basedir}/wrappers"
@@ -10,10 +10,9 @@ OUTDIR = Path(config["output_dir"])
 if config["pore_c_version"] == "rel":
     PORE_C_CONDA_FILE = "../envs/pore_c.yml"
 else:
-    # if running in development mode then we expect pore_c to be installed in the
-    # environment that contains the snakemake command
+    # run using the version of pore-c in the submodule
     assert config["pore_c_version"] == "dev"
-    PORE_C_CONDA_FILE = ""
+    PORE_C_CONDA_FILE = "" #../envs/pore_c_dev.yml"
 
 
 def create_config_dataframes():
