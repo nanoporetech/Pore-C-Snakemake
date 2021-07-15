@@ -12,7 +12,11 @@ include = '\.smk$|^Snakefile|\.py$'
 [tool.commitizen]
 name = "cz_conventional_commits"
 version = "0.2.0"
-tag_format = "0.2.0"
+tag_format = "$version"
+version_files = [
+ "pyproject.toml",
+]
+update_changelog_on_bump = true
 
 [build-system]
 requires = [

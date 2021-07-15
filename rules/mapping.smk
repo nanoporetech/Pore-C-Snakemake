@@ -23,9 +23,9 @@ rule align_bwa:
     shell:
         "( bwa {params.cli_opts} -t {threads} "
         "{input.refgenome}  {input.fastq} "
-        " | python {workflow.basedir}/scripts/reformat_bam.py "
+        " | pore_c alignments reformat-bam - - "
         " | samtools sort -O bam -m {params.memory} -@ {params.sort_threads} -o {output.bam} -) 2>{log} ;"
-        " samtools index {output.bam} 2>{log} " # TODO: replace this with pore_c command
+        " samtools index {output.bam} 2>{log} "
 
 
 def is_phased(wildcards):
@@ -45,7 +45,7 @@ rule haplotag:
         refgenome=paths.refgenome.fasta_unzipped,
     params:
         vcf=lookup_value("vcf_path", mapping_df),
-        is_phased=is_phased, #conda: "../envs/whatshap.yml"
+        is_phased=is_phased,  #conda: "../envs/whatshap.yml"
     log:
         to_log(paths.mapping.haplotagged_aligns),
     benchmark:

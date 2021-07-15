@@ -164,7 +164,7 @@ rule create_hic:
     output:
         paths.juicebox.hic,
     input:
-        hicref=paths.juicebox.hicref, # dummy dependency, file needed for conversion to binary
+        hicref=paths.juicebox.hicref,  # dummy dependency, file needed for conversion to binary
         chromsizes=paths.refgenome.chromsizes,
         pairs=paths.pairs.pairs,
         tools=paths.juicebox.tools,
