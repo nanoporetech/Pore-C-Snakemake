@@ -12,7 +12,7 @@ if config["pore_c_version"] == "rel":
 else:
     # run using the version of pore-c in the submodule
     assert config["pore_c_version"] == "dev"
-    PORE_C_CONDA_FILE = "" #../envs/pore_c_dev.yml"
+    PORE_C_CONDA_FILE = ""  # ../envs/pore_c_dev.yml"
 
 
 def create_config_dataframes():
