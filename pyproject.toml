@@ -17,7 +17,6 @@ version_files = [
  "pyproject.toml",
 ]
 update_changelog_on_bump = true
-changelog_start_rev = "0.2.0"
 
 [build-system]
 requires = [
