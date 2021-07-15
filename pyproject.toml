@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pore-c-snakemake"
-version = "0.2.0"
+version = "0.3.0"
 description = "A snakemake pipeline to run the pore-c tool suite"
 authors = ["Eoghan Harrington <eoghan.harrington@nanoporetech.com>"]
 
@@ -11,7 +11,7 @@ include = '\.smk$|^Snakefile|\.py$'
 
 [tool.commitizen]
 name = "cz_conventional_commits"
-version = "0.2.0"
+version = "0.3.0"
 tag_format = "$version"
 version_files = [
  "pyproject.toml",
