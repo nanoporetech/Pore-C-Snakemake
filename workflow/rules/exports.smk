@@ -7,6 +7,7 @@ rule to_cooler:
         fragments=paths.virtual_digest.fragments,
     params:
         prefix=to_prefix(paths.matrix.cool, 1),
+        dask_settings=config["software"]["dask"]["settings"],
     log:
         to_log(paths.matrix.cool),
     benchmark:
@@ -15,7 +16,7 @@ rule to_cooler:
     conda:
         PORE_C_CONDA_FILE
     shell:
-        "pore_c {DASK_SETTINGS} --dask-num-workers {threads} "
+        "pore_c {params.dask_settings} --dask-num-workers {threads} "
         " contacts export {input.contacts} cooler {params.prefix} --fragment-table {input.fragments} --chromsizes {input.chromsizes} 2>{log} "
 
 
@@ -28,6 +29,7 @@ rule to_haplotyped_cooler:
         fragments=paths.virtual_digest.fragments,
     params:
         prefix=to_prefix(paths.matrix.haplotyped_cools, 2),
+        dask_settings=config["software"]["dask"]["settings"],
     log:
         to_log(paths.matrix.haplotyped_cools),
     benchmark:
@@ -36,7 +38,7 @@ rule to_haplotyped_cooler:
     conda:
         PORE_C_CONDA_FILE
     shell:
-        "pore_c {DASK_SETTINGS} --dask-num-workers {threads} "
+        "pore_c {params.dask_settings} --dask-num-workers {threads} "
         " contacts export {input.contacts} cooler {params.prefix} --by-haplotype --fragment-table {input.fragments} --chromsizes {input.chromsizes} 2>{log} "
 
 
@@ -66,6 +68,7 @@ rule to_unsorted_pairs:
         chromsizes=paths.refgenome.chromsizes,
     params:
         prefix=to_prefix(paths.pairs.unsorted_pairs, 1),
+        dask_settings=config["software"]["dask"]["settings"],
     log:
         to_log(paths.pairs.unsorted_pairs),
     benchmark:
@@ -74,7 +77,7 @@ rule to_unsorted_pairs:
     conda:
         PORE_C_CONDA_FILE
     shell:
-        "pore_c {DASK_SETTINGS} --dask-num-workers {threads} "
+        "pore_c {params.dask_settings} --dask-num-workers {threads} "
         " contacts export {input.contacts} pairs {params.prefix} --chromsizes {input.chromsizes} 2>{log} "
 
 
@@ -118,6 +121,7 @@ rule to_salsa_bed:
         contacts=paths.merged_contacts.contacts,
     params:
         prefix=to_prefix(paths.assembly.salsa_bed),
+        dask_settings=config["software"]["dask"]["settings"],
     log:
         to_log(paths.assembly.salsa_bed),
     benchmark:
@@ -126,7 +130,7 @@ rule to_salsa_bed:
     conda:
         PORE_C_CONDA_FILE
     shell:
-        "pore_c {DASK_SETTINGS} --dask-num-workers {threads} "
+        "pore_c {params.dask_settings} --dask-num-workers {threads} "
         " contacts export {input.contacts} salsa_bed {params.prefix}  2>{log}"
 
 
@@ -148,6 +152,8 @@ rule create_hicRef:
         paths.juicebox.hicref,
     input:
         paths.virtual_digest.fragments,
+    params:
+        dask_settings=config["software"]["dask"]["settings"],
     log:
         to_log(paths.juicebox.hicref),
     benchmark:
@@ -156,7 +162,7 @@ rule create_hicRef:
         PORE_C_CONDA_FILE
     threads: 1
     shell:
-        "pore_c {DASK_SETTINGS} --dask-num-workers {threads} "
+        "pore_c {params.dask_settings} --dask-num-workers {threads} "
         "refgenome fragments-to-hicref {input} {output} 2>{log}"
 
 
@@ -184,6 +190,7 @@ rule to_mnd:
         refgenome=paths.refgenome.fasta,
     params:
         prefix=to_prefix(paths.juicebox.mnd),
+        dask_settings=config["software"]["dask"]["settings"],
     log:
         to_log(paths.juicebox.mnd),
     benchmark:
@@ -192,5 +199,5 @@ rule to_mnd:
     conda:
         PORE_C_CONDA_FILE
     shell:
-        "pore_c {DASK_SETTINGS} --dask-num-workers {threads} "
+        "pore_c {params.dask_settings} --dask-num-workers {threads} "
         " contacts export {input.contacts} merged_no_dups {params.prefix} --reference-fasta {input.refgenome} 2>{log}"

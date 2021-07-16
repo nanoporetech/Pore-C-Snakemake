@@ -23,6 +23,8 @@ rule filter_bam:
     output:
         filtered_bam=paths.mapping.filtered_bam,
         filtered_bai=paths.mapping.filtered_bai,
+    params:
+        dask_settings=config["software"]["dask"]["settings"],
     benchmark:
         to_benchmark(paths.mapping.filtered_bam)
     log:
@@ -30,7 +32,7 @@ rule filter_bam:
     conda:
         PORE_C_CONDA_FILE
     shell:
-        "( pore_c {DASK_SETTINGS} --dask-num-workers {threads} "
+        "( pore_c {params.dask_settings} --dask-num-workers {threads} "
         "alignments filter-bam {input.bam} {input.pore_c_table} {output.filtered_bam} "
         " --clean-read-name ;"
         " samtools index {output.filtered_bam} ; ) 2>{log} "

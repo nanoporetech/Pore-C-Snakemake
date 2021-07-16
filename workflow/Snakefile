@@ -4,7 +4,7 @@ from pathlib import Path
 from snakemake.utils import validate, min_version
 
 ##### set minimum snakemake version #####
-min_version("5.5.4")
+min_version("6.0.0")
 
 
 wildcard_constraints:
@@ -18,7 +18,7 @@ BASE_DIR = Path(workflow.basedir)
 
 ### Validation of schemas ###
 ##### load config and sample sheets ##
-configfile: BASE_DIR / "config/config.yaml"
+# configfile: "config/config.yaml"
 
 
 ##### load rules #####

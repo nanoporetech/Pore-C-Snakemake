@@ -1,6 +1,3 @@
-
-
-
 rule align_bwa:
     output:
         bam=paths.mapping.coord_sorted_bam,
@@ -60,6 +57,8 @@ rule create_alignment_table:
         alignment_haplotypes=paths.mapping.haplotagged_aligns,
     output:
         pq=paths.align_table.alignment,
+    params:
+        dask_settings=config["software"]["dask"]["settings"],
     log:
         to_log(paths.align_table.alignment),
     benchmark:
@@ -68,7 +67,7 @@ rule create_alignment_table:
     conda:
         PORE_C_CONDA_FILE
     shell:
-        "pore_c {DASK_SETTINGS} --dask-num-workers {threads} "
+        "pore_c {params.dask_settings} --dask-num-workers {threads} "
         "alignments create-table {input.bam} {output.pq} --alignment-haplotypes {input.alignment_haplotypes} 2>{log}"
 
 
@@ -78,6 +77,8 @@ rule assign_fragments:
         fragments_table=paths.virtual_digest.fragments,
     output:
         pq=paths.align_table.pore_c,
+    params:
+        dask_settings=config["software"]["dask"]["settings"],
     log:
         to_log(paths.align_table.pore_c),
     benchmark:
@@ -86,7 +87,7 @@ rule assign_fragments:
     conda:
         PORE_C_CONDA_FILE
     shell:
-        "pore_c {DASK_SETTINGS} --dask-num-workers {threads} "
+        "pore_c {params.dask_settings} --dask-num-workers {threads} "
         "alignments assign-fragments {input.align_table} {input.fragments_table} {output} 2>{log}"
 
 
@@ -97,6 +98,7 @@ rule to_contacts:
         contacts=paths.contacts.contacts,
     params:
         prefix=to_prefix(paths.contacts.contacts),
+        dask_settings=config["software"]["dask"]["settings"],
     log:
         to_log(paths.contacts.contacts),
     benchmark:
@@ -105,7 +107,7 @@ rule to_contacts:
         PORE_C_CONDA_FILE
     threads: 1
     shell:
-        "pore_c {DASK_SETTINGS} --dask-num-workers {threads} "
+        "pore_c {params.dask_settings} --dask-num-workers {threads} "
         "alignments to-contacts {input} {output.contacts} 2>{log}"
 
 
@@ -144,6 +146,8 @@ rule merge_contact_files:
         directory(paths.merged_contacts.contacts),
     input:
         paths.merged_contacts.fofn,
+    params:
+        dask_settings=config["software"]["dask"]["settings"],
     log:
         to_log(paths.merged_contacts.contacts),
     benchmark:
@@ -152,7 +156,7 @@ rule merge_contact_files:
     conda:
         PORE_C_CONDA_FILE
     shell:
-        "pore_c {DASK_SETTINGS} --dask-num-workers {threads} "
+        "pore_c {params.dask_settings} --dask-num-workers {threads} "
         "contacts merge {input} {output} --fofn"
 
 
@@ -165,6 +169,7 @@ rule summarise_contacts:
         read_summary=paths.basecall.summary,
     params:
         metadata=lookup_json(["run_id", "enzyme", "biospecimen", "refgenome_id", "phase_set_id"], mapping_df),
+        dask_settings=config["software"]["dask"]["settings"],
     log:
         to_log(paths.merged_contacts.concatemers),
     benchmark:
@@ -173,6 +178,6 @@ rule summarise_contacts:
     conda:
         PORE_C_CONDA_FILE
     shell:
-        "pore_c {DASK_SETTINGS} --dask-num-workers {threads} "
+        "pore_c {params.dask_settings} --dask-num-workers {threads} "
         "contacts summarize {input.contacts} {input.read_summary} {output.pq} {output.csv} "
         "--user-metadata '{params.metadata}' 2>{log}"

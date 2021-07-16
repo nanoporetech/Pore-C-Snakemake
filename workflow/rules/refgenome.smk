@@ -8,6 +8,7 @@ rule add_refgenome:
     params:
         fasta=lookup_value("refgenome_path", reference_df),
         prefix=to_prefix(paths.refgenome.catalog),
+        dask_settings=config["software"]["dask"]["settings"],
     log:
         to_log(paths.refgenome.catalog),
     benchmark:
@@ -16,7 +17,7 @@ rule add_refgenome:
     conda:
         PORE_C_CONDA_FILE
     shell:
-        "pore_c {DASK_SETTINGS} --dask-num-workers {threads} "
+        "pore_c {params.dask_settings} --dask-num-workers {threads} "
         "refgenome prepare {params.fasta} {params.prefix} --genome-id {wildcards.refgenome_id} 2> {log}"
 
 
@@ -28,6 +29,7 @@ rule virtual_digest:
         paths.virtual_digest.fragments,
         paths.virtual_digest.digest_stats,
     params:
+        dask_settings=config["software"]["dask"]["settings"],
         prefix=to_prefix(paths.virtual_digest.catalog),
     benchmark:
         to_benchmark(paths.virtual_digest.catalog)
@@ -37,7 +39,7 @@ rule virtual_digest:
     conda:
         PORE_C_CONDA_FILE
     shell:
-        "pore_c {DASK_SETTINGS} --dask-num-workers {threads} "
+        "pore_c {params.dask_settings} --dask-num-workers {threads} "
         "refgenome virtual-digest {input} {wildcards.enzyme} {params.prefix} -n {threads} 2> {log}"
 
 

@@ -6,6 +6,9 @@ checkpoint import_basecalls:
     params:
         fname=lookup_value("fastq_path", basecall_df),
         prefix=to_prefix(paths.basecall.catalog),
+        dask_settings=config["software"]["dask"]["settings"],
+        max_read_length=config["max_read_length"],
+        reads_per_batch=config["reads_per_batch"],
     log:
         to_log(paths.basecall.catalog),
     benchmark:
@@ -14,9 +17,9 @@ checkpoint import_basecalls:
         PORE_C_CONDA_FILE
     threads: 1
     shell:
-        "pore_c {DASK_SETTINGS} --dask-num-workers {threads} "
-        "reads prepare {params.fname} {params.prefix} --max-read-length {config[max_read_length]} "
-        " --batch-size {config[reads_per_batch]} 2> {log}"
+        "pore_c {params.dask_settings} --dask-num-workers {threads} "
+        "reads prepare {params.fname} {params.prefix} --max-read-length {params.max_read_length} "
+        " --batch-size {params.reads_per_batch} 2> {log}"
 
 
 rule import_fast5s:
