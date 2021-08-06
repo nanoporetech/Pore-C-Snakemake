@@ -46,6 +46,11 @@ refgenome:
     bwt: '{refgenome_id}.rg.fa.bwt'
     fasta_unzipped: '{refgenome_id}.rg.fa'
     fasta_unzipped_fai: '{refgenome_id}.rg.fa.fai'
+variants_batch:
+    links_table: '{enzyme}_{batch_id}_{run_id}_{refgenome_id}_{phase_set_id}.variant_links.pq'
+variants:
+    links_fofn: '{enzyme}_{run_id}_{refgenome_id}_{phase_set_id}.variant_links.fofn'
+    links_table: '{enzyme}_{run_id}_{refgenome_id}_{phase_set_id}.variant_links.pq'
 virtual_digest:
     catalog: '{enzyme}_{refgenome_id}.vd.catalog.yaml'
     digest_stats: '{enzyme}_{refgenome_id}.vd.digest_stats.csv'

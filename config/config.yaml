@@ -52,7 +52,7 @@ software:
     to_salsa_bed:
       threads: 4
   sort:
-      threads: 10
+      threads: 4
       memory_per_thread: "4G"
   f5c:
       run_mode: cpu  # gpu

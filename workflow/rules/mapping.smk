@@ -21,8 +21,7 @@ rule align_bwa:
         "( bwa {params.cli_opts} -t {threads} "
         "{input.refgenome}  {input.fastq} "
         " | pore_c alignments reformat-bam - - "
-        " | samtools sort -O bam -m {params.memory} -@ {params.sort_threads} -o {output.bam} -) 2>{log} ;"
-        " samtools index {output.bam} 2>{log} "
+        " | samtools sort -O bam -m {params.memory} -@ {params.sort_threads} -o {output.bam}##idx##{output.bai} --write-index -) 2>{log} ;"
 
 
 def is_phased(wildcards):
